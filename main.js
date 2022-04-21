@@ -36,6 +36,34 @@ function buttonClickAction () {
 };
 
 //#endregion
+//----->Festival display cards on the main page
+//#region
+let cardContainer = document.getElementById("card-container");
+
+for (let i = 0; i < 3; i++) {
+    let card = document.createElement("div");
+    card.setAttribute("class", "card");
+    let cardBody = document.createElement("div");
+    cardBody.setAttribute("class", "card-body")
+    let cardTitle = document.createElement("h5");
+    cardTitle.setAttribute("class", "card-title");
+    cardTitle.innerText = festivalData[0]["index"][i]["bezeichnung"]
+    let cardText = document.createElement("p");
+    cardText.setAttribute("class", "card-text");
+    let linkLocation = festivalData[0]["index"][i]["www"];
+    let eventLink = document.createElement("a");
+    eventLink.setAttribute("href", linkLocation);
+    eventLink.innerHTML=linkLocation;
+    cardText.innerText = `${festivalData[0]["index"][i]["strasse"]}, on ${festivalData[0]["index"][i]["von"]}, more info on `;
+
+    cardText.appendChild(eventLink);
+    cardBody.appendChild(cardTitle);
+    cardBody.appendChild(cardText);
+    card.appendChild(cardBody);
+    cardContainer.appendChild(card);
+};
+
+//#endregion
 //----->Table on the street-festivals.html page
 //#region
 
