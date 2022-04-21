@@ -1,6 +1,6 @@
 //-----TABLE OF CONTENTS-----
-//"read more" button on the main page
-//Table with data on the street-festivals.html page
+//----->"read more" button on the main page
+//----->Table with data on the street-festivals.html page
 
 
 
@@ -8,8 +8,7 @@
 // fetching data from the data file
 let festivalData = data; 
 
-//-----
-//"read more" button on the main page
+//----->"read more" button on the main page
 //#region
 
 //function to expand the text on the main page
@@ -18,8 +17,26 @@ function showMoreText () {
     paragraph.removeAttribute("class")
 };
 
+//function to hide the text on the main page
+function hideText () {    
+    let paragraph = document.getElementById("index-description");
+    paragraph.setAttribute("class", "d-none");
+}; 
+
+//creating a function to run while clicking the button
+function buttonClickAction () {
+    let readMoreButton = document.getElementById("read-more-button");
+    if (readMoreButton.innerHTML == "read more...") {
+        showMoreText();
+        readMoreButton.innerHTML = "read less...";
+    } else {
+        hideText();
+        readMoreButton.innerHTML = "read more...";
+    }
+};
+
 //#endregion
-//Table on the street-festivals.html page
+//----->Table on the street-festivals.html page
 //#region
 
 // locating table header and table body
