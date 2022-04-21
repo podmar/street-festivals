@@ -1,4 +1,5 @@
 //-----TABLE OF CONTENTS-----
+//"read more" button on the main page
 //Table with data on the street-festivals.html page
 
 
@@ -8,16 +9,25 @@
 let festivalData = data; 
 
 //-----
+//"read more" button on the main page
+//#region
+
+//function to expand the text on the main page
+function showMoreText () {
+    let paragraph = document.getElementById("index-description");
+    paragraph.removeAttribute("class")
+};
+
+//#endregion
 //Table on the street-festivals.html page
 //#region
+
 // locating table header and table body
 let tableHeader = document.getElementById("table-header");
 let tableBody = document.getElementById("table-body");
 
-console.log(tableBody);
-console.log(tableHeader);
-//
-
+//creating table headers
+let th1 = doc
 
 //creating table contents from the data
 for (let n = 0; n < festivalData[0]["index"].length; n++) {
@@ -37,3 +47,4 @@ for (let n = 0; n < festivalData[0]["index"].length; n++) {
 }; 
 
 //#endregion
+//
