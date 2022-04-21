@@ -43,9 +43,6 @@ function buttonClickAction () {
 let tableHeader = document.getElementById("table-header");
 let tableBody = document.getElementById("table-body");
 
-//creating table headers
-let th1 = doc
-
 //creating table contents from the data
 for (let n = 0; n < festivalData[0]["index"].length; n++) {
     let tr = document.createElement("tr");
