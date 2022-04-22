@@ -1,13 +1,13 @@
 //-----TABLE OF CONTENTS-----
-//->"read more" button on the main page
-//->fetching data & creating cards & table
-//->display cards function for the main page
-//->display table function for the street-festivals.html page
+//-> read more button on the main page
+//-> fetching data & creating cards & table
+//-> display cards function for the main page
+//-> display table function for the street-festivals.html page
 
 
 //-----END OF TABLE OF CONTENTS-----
 
-//----->"read more" button on the main page
+//-----> read more button on the main page
 //#region
 
 //function to expand the text on the main page
@@ -35,7 +35,7 @@ function buttonClickAction () {
 };
 
 //#endregion
-//----->fetching data & creating cards & table
+//-----> fetching data & creating cards & table
 //#region
 let url = "https://www.berlin.de/sen/web/service/maerkte-feste/strassen-volksfeste/index.php/index/all.json?q="
 
@@ -46,11 +46,10 @@ fetch(url)
         displayCards(festivalData);
         displayTable(festivalData);
         })
-
     .catch((err) => console.log(err)); 
 
 //#endregion
-//----->display cards function for the index.html page
+//-----> display cards function for the index.html page
 //#region
 
 function displayCards (festivalData) {
@@ -85,7 +84,7 @@ function displayCards (festivalData) {
 };
 
 //#endregion
-//----->display table function for the street-festivals.html page
+//-----> display table function for the street-festivals.html page
 //#region
 
 function displayTable (festivalData) {
