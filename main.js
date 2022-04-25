@@ -59,15 +59,21 @@ function displayCards (festivalData) {
     if (cardContainer != null) {
         //generating cards
         for (let i = 0; i < 3; i++) {
+
         let card = document.createElement("div");
-        card.setAttribute("class", "card");
+        card.classList.add("card");
+        card.classList.add("col-4");
+
         let cardBody = document.createElement("div");
-        cardBody.setAttribute("class", "card-body")
+        cardBody.setAttribute("class", "card-body");
+
         let cardTitle = document.createElement("h5");
         cardTitle.setAttribute("class", "card-title");
         cardTitle.innerText = festivalData[i]["bezeichnung"]
+        
         let cardText = document.createElement("p");
         cardText.setAttribute("class", "card-text");
+        
         let linkLocation = festivalData[i]["www"];
         let eventLink = document.createElement("a");
         eventLink.setAttribute("href", linkLocation);
