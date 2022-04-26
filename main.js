@@ -2,6 +2,7 @@
 //-> read more button on the main page
 //-> fetching data & creating cards & table
 //-> display cards function for the main page
+//-> display select options for the filters on street-festivals.html page
 //-> display table function for the street-festivals.html page
 
 
@@ -45,6 +46,7 @@ fetch(url)
         let festivalData = data.index; 
         displayCards(festivalData);
         displayTable(festivalData);
+        displayOptions(festivalData);
         })
     .catch((err) => console.log(err)); 
 
@@ -86,6 +88,32 @@ function displayCards (festivalData) {
         card.appendChild(cardBody);
         cardContainer.appendChild(card);
         };
+    };
+};
+
+//#endregion
+//-----> display select options for the filters on street-festivals.html page
+//#region
+
+function displayOptions (festivalData) {
+    //locating the select container for the options
+    let select = document.getElementById("neighbourhoodSelect");
+
+    // console.log(select != null);
+
+    //validating if user on the festival page
+    if (select != null) {
+        //creating options
+        let neighbourhoods = [];
+        festivalData.forEach(festival => {
+            if (!neighbourhoods.includes(festival.bezirk)) {
+                neighbourhoods.push(festival.bezirk);
+                let option = document.createElement("option");
+                option.innerText = festival.bezirk;
+
+                select.appendChild(option);
+            }; 
+        });
     };
 };
 
