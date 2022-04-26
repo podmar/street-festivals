@@ -1,8 +1,10 @@
 //-----TABLE OF CONTENTS-----
 //-> read more button on the main page
-//-> fetching data & creating cards & table
-//-> display cards function for the main page
+//-> controller function: fetching data, creating cards, table & filters
+//-> display cards function for the index.html page
 //-> display select options for the filters on street-festivals.html page
+//-> filter by neighbourhood select
+//-> add event listeners to the inputs
 //-> display table function for the street-festivals.html page
 
 
@@ -36,7 +38,7 @@ function buttonClickAction () {
 };
 
 //#endregion
-//-----> fetching data & creating cards & table
+//-----> controller function: fetching data, creating cards, table & filters
 //#region
 let url = "https://www.berlin.de/sen/web/service/maerkte-feste/strassen-volksfeste/index.php/index/all.json?q="
 
@@ -118,19 +120,28 @@ function displayOptions (festivalData) {
         });
     };
 };
+//#endregion
+//-----> filter by neighbourhood select
+//#region
 
+function fiterByNeighbourhood (festivalData) {
+    let neighbourhood = document.getElementById("neighbourhoodSelect").value
+    let filteredByNeighbourhood = festivalData.filter(festival => 
+        festival.bezirk === neighbourhood);
+    displayTable(filteredByNeighbourhood);
+};
+
+//#endregion
 //-----> add event listeners to the inputs
 //#region
 
 function addEventListeners (festivalData) {
     document.getElementById("neighbourhoodSelect")
-        .addEventListener("change", event => console.log("dropdown event"));
+        .addEventListener("change", event => fiterByNeighbourhood(festivalData));
 
     document.getElementById("monthInput")
-    .addEventListener("change", event => console.log("change date event"));
+        .addEventListener("change", event => console.log("change date event"));
 };
-
-//#endregion
 
 //#endregion
 //-----> display table function for the street-festivals.html page
