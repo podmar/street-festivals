@@ -111,6 +111,7 @@ function displayOptions (festivalData) {
                 neighbourhoods.push(festival.bezirk);
                 let option = document.createElement("option");
                 option.innerText = festival.bezirk;
+                option.value = festival.bezirk;
 
                 select.appendChild(option);
             }; 
