@@ -47,6 +47,7 @@ fetch(url)
         displayCards(festivalData);
         displayTable(festivalData);
         displayOptions(festivalData);
+        addEventListeners(festivalData);
         })
     .catch((err) => console.log(err)); 
 
@@ -117,6 +118,19 @@ function displayOptions (festivalData) {
     };
 };
 
+//-----> add event listeners to the inputs
+//#region
+
+function addEventListeners (festivalData) {
+    document.getElementById("neighbourhoodSelect")
+        .addEventListener("change", event => console.log("dropdown event"));
+
+    document.getElementById("monthInput")
+    .addEventListener("change", event => console.log("change date event"));
+};
+
+//#endregion
+
 //#endregion
 //-----> display table function for the street-festivals.html page
 //#region
@@ -125,6 +139,7 @@ function displayTable (festivalData) {
     // locating table header and table body
     let tableHeader = document.getElementById("table-header");
     let tableBody = document.getElementById("table-body");
+    tableBody.innerHTML = ""
 
     //validating if user on the festival page
     if (tableBody != null) {
