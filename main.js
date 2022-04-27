@@ -135,12 +135,11 @@ function fiterByNeighbourhood (festivalData) {
 //#endregion
 //-----> filter by month input
 //#region
+
 function filterByMonth (festivalData) {
-    let month = document.getElementById("monthInput").value;
-    console.log(month);
-    // let filteredByMonth = festivalData.filter(festival => 
-    //     );
-    // displayTable(filteredByMonth);
+    let pickedMonth = new Date(document.getElementById("monthInput").value).getMonth();
+    let filteredByMonth = festivalData.filter(festival => new Date(festival.von).getMonth() === pickedMonth);
+    displayTable(filteredByMonth);
 };
 
 //#endregion
@@ -181,7 +180,7 @@ function displayTable (festivalData) {
                 year: "numeric",
               });
             td2.innerHTML = date;
-            
+
             let td3 = document.createElement("td");
             td3.innerHTML = festivalData[n]["bezirk"];
 
