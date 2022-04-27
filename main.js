@@ -128,7 +128,7 @@ function displayOptions (festivalData) {
 function fiterByNeighbourhood (festivalData) {
     let neighbourhood = document.getElementById("neighbourhoodSelect").value;
     let filteredByNeighbourhood = festivalData.filter(festival => 
-        festival.bezirk === neighbourhood);
+        festival.bezirk === neighbourhood || neighbourhood === "all");
     displayTable(filteredByNeighbourhood);
     return filteredByNeighbourhood;
 };
@@ -151,9 +151,12 @@ function filterByMonth (festivalData) {
 function addEventListeners (festivalData) {
     document.getElementById("neighbourhoodSelect")
         .addEventListener("change", event => fiterByNeighbourhood(festivalData));
+        // .addEventListener("change", event => fiterByNeighbourhood(!filterByMonth(festivalData) === null ? filterByMonth(festivalData) : festivalData));
 
     document.getElementById("monthInput")
         .addEventListener("change", event => filterByMonth(festivalData));
+        //.addEventListener("change", event => filterByMonth(!fiterByNeighbourhood(festivalData) === null ? fiterByNeighbourhood(festivalData) : festivalData));
+
 };
 
 //#endregion
