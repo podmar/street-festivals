@@ -165,13 +165,28 @@ function filterThemAll(festivalData) {
 
 function addEventListeners (festivalData) {
     document.getElementById("neighbourhoodSelect")
-        .addEventListener("change", event => filterByNeighbourhood(festivalData));
+        // .addEventListener("change", event => filterThemAll(festivalData));
+        // .addEventListener("change", event => filterByNeighbourhood(festivalData));
         // .addEventListener("change", event => filterByNeighbourhood(!filterByMonth(festivalData) === null ? filterByMonth(festivalData) : festivalData));
-
+        .addEventListener("change", function event () {
+            if (document.getElementById("monthInput").value === "") {
+                filterByNeighbourhood(festivalData)}
+             else {
+                filterByNeighbourhood(filterByMonth(festivalData))
+            };
+        });
+    //if you choose the quarter and change the date, the quarter changes to all
     document.getElementById("monthInput")
-        .addEventListener("change", event => filterByMonth(festivalData));
+        // .addEventListener("change", event => filterThemAll(festivalData));
+        // .addEventListener("change", event => filterByMonth(festivalData));
         //.addEventListener("change", event => filterByMonth(!filterByNeighbourhood(festivalData) === null ? filterByNeighbourhood(festivalData) : festivalData));
-
+        .addEventListener("change", event => {
+            if (document.getElementById("neighbourhoodSelect").value = "all") {
+                filterByMonth(festivalData);
+            } else {
+                filterByMonth(filterByNeighbourhood(festivalData))
+            };
+        });
 };
 
 //#endregion
