@@ -173,8 +173,15 @@ function displayTable (festivalData) {
 
             let td1 = document.createElement("td");
             td1.innerHTML = festivalData[n]["rss_titel"];
+
             let td2 = document.createElement("td");
-            td2.innerHTML = festivalData[n]["von"];
+            let date = new Date(festivalData[n]["von"]).toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              });
+            td2.innerHTML = date;
+            
             let td3 = document.createElement("td");
             td3.innerHTML = festivalData[n]["bezirk"];
 
