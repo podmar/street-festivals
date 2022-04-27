@@ -125,7 +125,7 @@ function displayOptions (festivalData) {
 //-----> filter by neighbourhood select
 //#region
 
-function fiterByNeighbourhood (festivalData) {
+function filterByNeighbourhood (festivalData) {
     let neighbourhood = document.getElementById("neighbourhoodSelect").value;
     let filteredByNeighbourhood = festivalData.filter(festival => 
         festival.bezirk === neighbourhood || neighbourhood === "all");
@@ -151,11 +151,11 @@ function filterByMonth (festivalData) {
 
 function filterThemAll(festivalData) {
     if (document.getElementById("monthInput").value === "") {
-        fiterByNeighbourhood(festivalData);
+        filterByNeighbourhood(festivalData);
     } else if (document.getElementById("neighbourhoodSelect").value = "all") {
         filterByMonth(festivalData);
     } else {
-        fiterByNeighbourhood(filterByMonth(festivalData))
+        filterByNeighbourhood(filterByMonth(festivalData))
     };
 };
 
@@ -165,12 +165,12 @@ function filterThemAll(festivalData) {
 
 function addEventListeners (festivalData) {
     document.getElementById("neighbourhoodSelect")
-        .addEventListener("change", event => fiterByNeighbourhood(festivalData));
-        // .addEventListener("change", event => fiterByNeighbourhood(!filterByMonth(festivalData) === null ? filterByMonth(festivalData) : festivalData));
+        .addEventListener("change", event => filterByNeighbourhood(festivalData));
+        // .addEventListener("change", event => filterByNeighbourhood(!filterByMonth(festivalData) === null ? filterByMonth(festivalData) : festivalData));
 
     document.getElementById("monthInput")
         .addEventListener("change", event => filterByMonth(festivalData));
-        //.addEventListener("change", event => filterByMonth(!fiterByNeighbourhood(festivalData) === null ? fiterByNeighbourhood(festivalData) : festivalData));
+        //.addEventListener("change", event => filterByMonth(!filterByNeighbourhood(festivalData) === null ? filterByNeighbourhood(festivalData) : festivalData));
 
 };
 
