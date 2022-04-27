@@ -130,6 +130,7 @@ function fiterByNeighbourhood (festivalData) {
     let filteredByNeighbourhood = festivalData.filter(festival => 
         festival.bezirk === neighbourhood);
     displayTable(filteredByNeighbourhood);
+    return filteredByNeighbourhood;
 };
 
 //#endregion
@@ -140,6 +141,7 @@ function filterByMonth (festivalData) {
     let pickedMonth = new Date(document.getElementById("monthInput").value).getMonth();
     let filteredByMonth = festivalData.filter(festival => new Date(festival.von).getMonth() === pickedMonth);
     displayTable(filteredByMonth);
+    return filteredByMonth;
 };
 
 //#endregion
