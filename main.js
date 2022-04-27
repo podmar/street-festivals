@@ -4,6 +4,7 @@
 //-> display cards function for the index.html page
 //-> display select options for the filters on street-festivals.html page
 //-> filter by neighbourhood select
+//-> filter by month input
 //-> add event listeners to the inputs
 //-> display table function for the street-festivals.html page
 
@@ -125,10 +126,21 @@ function displayOptions (festivalData) {
 //#region
 
 function fiterByNeighbourhood (festivalData) {
-    let neighbourhood = document.getElementById("neighbourhoodSelect").value
+    let neighbourhood = document.getElementById("neighbourhoodSelect").value;
     let filteredByNeighbourhood = festivalData.filter(festival => 
         festival.bezirk === neighbourhood);
     displayTable(filteredByNeighbourhood);
+};
+
+//#endregion
+//-----> filter by month input
+//#region
+function filterByMonth (festivalData) {
+    let month = document.getElementById("monthInput").value;
+    console.log(month);
+    // let filteredByMonth = festivalData.filter(festival => 
+    //     );
+    // displayTable(filteredByMonth);
 };
 
 //#endregion
@@ -140,7 +152,7 @@ function addEventListeners (festivalData) {
         .addEventListener("change", event => fiterByNeighbourhood(festivalData));
 
     document.getElementById("monthInput")
-        .addEventListener("change", event => console.log("change date event"));
+        .addEventListener("change", event => filterByMonth(festivalData));
 };
 
 //#endregion
