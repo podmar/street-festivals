@@ -5,6 +5,7 @@
 //-> display select options for the filters on street-festivals.html page
 //-> filter by neighbourhood select
 //-> filter by month input
+//-> unified filter function (currently not in use)
 //-> add event listeners to the inputs
 //-> display table function for the street-festivals.html page
 
