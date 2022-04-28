@@ -190,10 +190,11 @@ function displayTable (festivalData) {
     // locating table header and table body
     let tableHeader = document.getElementById("table-header");
     let tableBody = document.getElementById("table-body");
-    tableBody.innerHTML = ""
 
     //validating if user on the festival page
     if (tableBody != null) {
+        //setting the table content to empty - needed while updating filters
+        tableBody.innerHTML = ""
         //creating table contents from the data
         for (let n = 0; n < festivalData.length; n++) {
             let tr = document.createElement("tr");
