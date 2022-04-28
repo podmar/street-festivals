@@ -11,12 +11,39 @@
 <body style="background-color: #D2E1D9;">
 
 <div class="container row">
-    <nav class="navbar navbar-light sticky-top justify-content-between" style="background-color: #D2E1D9;">
-        <a class="navbar-brand" href="#">FESTIVALS</a>
-        <a class="nav-link active" href="#">Home</a>
-        <a class="nav-link" href="street-festivals.html">Discover</a>
-        <!-- <i class="bi bi-list"></i> -->
-        <button class="navbar-toggler" type="button">
+    <nav class="navbar navbar-light fixed-top navbar-expand-sm" style="background-color: #D2E1D9;">
+        
+        <a class="navbar-brand" href="#">FESTIVALS <i class="bi bi-balloon"></i>
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="navbar-item active">
+                    <a class="nav-link active" href="#">Home</a>
+                </li>
+                <li class="navbar-item">
+                    <a class="nav-link" href="street-festivals.html">Discover</a>
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <form action="" class="d-flex">
+                <input type="text" class="form-control me-2" placeholder="festival name">
+                <button class="btn" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
+        </div>
+
+        <button 
+            class="navbar-toggler" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#navbarNav" 
+            type="button"
+            aria-controls="navbarNav" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
     </nav>
