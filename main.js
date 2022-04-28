@@ -164,22 +164,25 @@ function filterByMonth (festivalData) {
 //#region
 
 function addEventListeners (festivalData) {
-    document.getElementById("neighbourhoodSelect")
-        .addEventListener("change", function event () {
-            if (document.getElementById("monthInput").value === "") {
-                filterByNeighbourhood(festivalData); 
-            } else {
-                filterByNeighbourhood(filterByMonth(festivalData))
-            };
-        });
-    document.getElementById("monthInput")
-        .addEventListener("change", function event () {
-            if (document.getElementById("neighbourhoodSelect").value === "all") {
-                filterByMonth(festivalData);
-            } else {
-                filterByMonth(filterByNeighbourhood(festivalData));
-            };
-        });
+    //validating if user on the festival page
+    if (document.getElementById("neighbourhoodSelect" != null)) {
+        document.getElementById("neighbourhoodSelect")
+            .addEventListener("change", function event () {
+                if (document.getElementById("monthInput").value === "") {
+                    filterByNeighbourhood(festivalData); 
+                } else {
+                    filterByNeighbourhood(filterByMonth(festivalData))
+                };
+            });
+        document.getElementById("monthInput")
+            .addEventListener("change", function event () {
+                if (document.getElementById("neighbourhoodSelect").value === "all") {
+                    filterByMonth(festivalData);
+                } else {
+                    filterByMonth(filterByNeighbourhood(festivalData));
+                };
+            });
+    };
 };
 
 //#endregion
