@@ -56,6 +56,17 @@ fetch(url)
     .catch((err) => console.log(err)); 
 
 //#endregion
+
+//-----> create event link function
+//#region
+function createEventLink (festivalData) {
+    let eventLink = document.createElement("a");
+    let linkLocation = festivalData[i]["www"];
+    eventLink.setAttribute("href", linkLocation);
+    eventLink.innerHTML = festivalData[i]["bezeichnung"];
+    return eventLink;
+};
+//#endregion
 //-----> display cards function for the index.html page
 //#region
 
@@ -203,7 +214,8 @@ function displayTable (festivalData) {
             let tr = document.createElement("tr");
 
             let td1 = document.createElement("td");
-            td1.innerHTML = festivalData[n]["rss_titel"];
+            let eventLink = 
+            td1.innerHTML = festivalData[n]["bezeichnung"];
 
             let td2 = document.createElement("td");
             let date = new Date(festivalData[n]["von"]).toLocaleDateString("en-GB", {
