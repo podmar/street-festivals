@@ -1,6 +1,7 @@
 //-----TABLE OF CONTENTS-----
 //-> read more button on the main page
 //-> controller function: fetching data, creating cards, table & filters
+//-> create event link function
 //-> display cards function for the index.html page
 //-> display select options for the filters on street-festivals.html page
 //-> filter by neighbourhood select
