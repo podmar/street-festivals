@@ -59,7 +59,7 @@ fetch(url)
 
 //-----> create event link function
 //#region
-function createEventLink (festivalData) {
+function createEventLink (festivalData, i) {
     let eventLink = document.createElement("a");
     let linkLocation = festivalData[i]["www"];
     eventLink.setAttribute("href", linkLocation);
@@ -88,10 +88,7 @@ function displayCards (festivalData) {
         let cardTitle = document.createElement("h5");
         cardTitle.setAttribute("class", "card-title");
 
-        let eventLink = document.createElement("a");
-        let linkLocation = festivalData[i]["www"];
-        eventLink.setAttribute("href", linkLocation);
-        eventLink.innerHTML = festivalData[i]["bezeichnung"];
+        let eventLink = createEventLink(festivalData, i);
         
         let cardText = document.createElement("p");
         cardText.setAttribute("class", "card-text");
