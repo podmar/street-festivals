@@ -76,18 +76,17 @@ function displayCards (festivalData) {
 
         let cardTitle = document.createElement("h5");
         cardTitle.setAttribute("class", "card-title");
-        cardTitle.innerText = festivalData[i]["bezeichnung"]
+
+        let eventLink = document.createElement("a");
+        let linkLocation = festivalData[i]["www"];
+        eventLink.setAttribute("href", linkLocation);
+        eventLink.innerHTML = festivalData[i]["bezeichnung"];
         
         let cardText = document.createElement("p");
         cardText.setAttribute("class", "card-text");
+        cardText.innerText = `${festivalData[i]["strasse"]} on ${festivalData[i]["von"]} until ${festivalData[i]["bis"]}.`;
         
-        let linkLocation = festivalData[i]["www"];
-        let eventLink = document.createElement("a");
-        eventLink.setAttribute("href", linkLocation);
-        eventLink.innerHTML=linkLocation;
-        cardText.innerText = `${festivalData[i]["strasse"]}, on ${festivalData[i]["von"]}, more info on `;
-
-        cardText.appendChild(eventLink);
+        cardTitle.appendChild(eventLink);
         cardBody.appendChild(cardTitle);
         cardBody.appendChild(cardText);
         card.appendChild(cardBody);
