@@ -64,6 +64,7 @@ function createEventLink (festivalData, i) {
     let eventLink = document.createElement("a");
     let linkLocation = festivalData[i]["www"];
     eventLink.setAttribute("href", linkLocation);
+    eventLink.classList.add("text-decoration-none", "text-reset");
     eventLink.innerHTML = festivalData[i]["bezeichnung"];
     return eventLink;
 };
