@@ -141,23 +141,23 @@ function filterByMonth (festivalData) {
     let pickedMonth = document.getElementById("monthInput").value;
     let filteredByMonth = festivalData.filter(festival => new Date(festival.von).getMonth() === new Date(pickedMonth).getMonth() || pickedMonth === "");
     displayTable(filteredByMonth);
-    console.log(filteredByMonth);
+    //console.log(filteredByMonth);
     return filteredByMonth;
 };
 
 //#endregion
-//-----> unified filter function
+//-----> unified filter function (currently not in use)
 //#region
 
-function filterThemAll(festivalData) {
-    if (document.getElementById("monthInput").value === "") {
-        filterByNeighbourhood(festivalData);
-    } else if (document.getElementById("neighbourhoodSelect").value = "all") {
-        filterByMonth(festivalData);
-    } else {
-        filterByNeighbourhood(filterByMonth(festivalData))
-    };
-};
+// function filterThemAll(festivalData) {
+//     if (document.getElementById("monthInput").value === "") {
+//         filterByNeighbourhood(festivalData);
+//     } else if (document.getElementById("neighbourhoodSelect").value === "all") {
+//         filterByMonth(festivalData);
+//     } else {
+//         filterByNeighbourhood(filterByMonth(festivalData))
+//     };
+// };
 
 //#endregion
 //-----> add event listeners to the inputs
@@ -165,26 +165,19 @@ function filterThemAll(festivalData) {
 
 function addEventListeners (festivalData) {
     document.getElementById("neighbourhoodSelect")
-        // .addEventListener("change", event => filterThemAll(festivalData));
-        // .addEventListener("change", event => filterByNeighbourhood(festivalData));
-        // .addEventListener("change", event => filterByNeighbourhood(!filterByMonth(festivalData) === null ? filterByMonth(festivalData) : festivalData));
         .addEventListener("change", function event () {
             if (document.getElementById("monthInput").value === "") {
-                filterByNeighbourhood(festivalData)}
-             else {
+                filterByNeighbourhood(festivalData); 
+            } else {
                 filterByNeighbourhood(filterByMonth(festivalData))
             };
         });
-    //if you choose the quarter and change the date, the quarter changes to all
     document.getElementById("monthInput")
-        // .addEventListener("change", event => filterThemAll(festivalData));
-        // .addEventListener("change", event => filterByMonth(festivalData));
-        //.addEventListener("change", event => filterByMonth(!filterByNeighbourhood(festivalData) === null ? filterByNeighbourhood(festivalData) : festivalData));
-        .addEventListener("change", event => {
-            if (document.getElementById("neighbourhoodSelect").value = "all") {
+        .addEventListener("change", function event () {
+            if (document.getElementById("neighbourhoodSelect").value === "all") {
                 filterByMonth(festivalData);
             } else {
-                filterByMonth(filterByNeighbourhood(festivalData))
+                filterByMonth(filterByNeighbourhood(festivalData));
             };
         });
 };
