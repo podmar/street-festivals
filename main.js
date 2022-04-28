@@ -211,8 +211,8 @@ function displayTable (festivalData) {
             let tr = document.createElement("tr");
 
             let td1 = document.createElement("td");
-            let eventLink = 
-            td1.innerHTML = festivalData[n]["bezeichnung"];
+            let eventLink = createEventLink(festivalData, n);
+            // td1.innerHTML = festivalData[n]["bezeichnung"];
 
             let td2 = document.createElement("td");
             let date = new Date(festivalData[n]["von"]).toLocaleDateString("en-GB", {
@@ -226,6 +226,7 @@ function displayTable (festivalData) {
             td3.innerHTML = festivalData[n]["bezirk"];
 
             tr.appendChild(td1);
+            td1.appendChild(eventLink);
             tr.appendChild(td2);
             tr.appendChild(td3);
             tableBody.appendChild(tr);
