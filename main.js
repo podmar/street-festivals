@@ -85,11 +85,14 @@ function displayCards (festivalData) {
     //validating if user on the main page
     if (cardContainer != null) {
         //generating cards
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 6; i++) {
 
+        let cardBox = document.createElement("div");
+        cardBox.classList.add("col-lg-4", "col-md-6", "p-2", "container");
+        
         let card = document.createElement("div");
         card.classList.add("card");
-        card.classList.add("col-4");
+        card.setAttribute("style", "height: 10rem");
 
         let cardBody = document.createElement("div");
         cardBody.setAttribute("class", "card-body");
@@ -107,7 +110,8 @@ function displayCards (festivalData) {
         cardBody.appendChild(cardTitle);
         cardBody.appendChild(cardText);
         card.appendChild(cardBody);
-        cardContainer.appendChild(card);
+        cardBox.appendChild(card);
+        cardContainer.appendChild(cardBox);
         };
     };
 };
