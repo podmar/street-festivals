@@ -63,6 +63,7 @@ fetch(url)
 function createEventLink (festivalData, i) {
     let eventLink = document.createElement("a");
     let linkLocation = festivalData[i]["www"];
+    // console.log(linkLocation);
     eventLink.setAttribute("href", linkLocation);
     eventLink.classList.add("text-decoration-none", "text-reset");
     eventLink.innerHTML = festivalData[i]["bezeichnung"];
@@ -175,7 +176,7 @@ function filterByMonth (festivalData) {
 
 function addEventListeners (festivalData) {
     //validating if user on the festival page
-    if (document.getElementById("neighbourhoodSelect" != null)) {
+    if (document.getElementById("table-header") != null) {
         document.getElementById("neighbourhoodSelect")
             .addEventListener("change", function event () {
                 if (document.getElementById("monthInput").value === "") {
