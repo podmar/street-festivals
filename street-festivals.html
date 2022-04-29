@@ -50,24 +50,24 @@
     </div>
 
     <div class="container">
-        <div class="container">
+        <div class="container p-3">
             <h1>Berlin street festivals</h1>
         </div>
     
         <div class="container row">
-            <div class="col-6">
-                <label for="neighbourhood">Choose a neighbourhood:</label>
+            <div class="col-sm-6 p-3">
+                <label class="p-1" for="neighbourhood">Choose a neighbourhood:</label>
                 <select class="form-control" name="neighbourhood" id="neighbourhoodSelect">
                     <option value="all">All</option>
                 </select>
             </div>
-            <div class="col-6">
-                <label for="month">Choose a month in 2022:</label>
+            <div class="col-sm-6 p-3">
+                <label class="p-1" for="month">Choose a month in 2022:</label>
                 <input class="form-control" name="month" type="month" id="monthInput" min="2022-01" max="2022-12">
             </div>
         </div>
     
-        <div class="container">
+        <div class="container p-3">
             <table class="table table-hover">
                 <thead class="thead-light" id="table-header"></thead>
                 <th>Name</th>
