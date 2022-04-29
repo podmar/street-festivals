@@ -17,25 +17,31 @@
 //#region
 
 //function to expand the text on the main page
-function showMoreText () {
+function expandTextAndPic () {
     let paragraph = document.getElementById("index-description");
-    paragraph.removeAttribute("class")
+    paragraph.removeAttribute("class");
+
+    let coverPic = document.getElementById("cover-pic");
+    coverPic.setAttribute("style", "height: 22em; width: 55em; object-fit: cover");
 };
 
 //function to hide the text on the main page
-function hideText () {    
+function collapseTextAndPic () {    
     let paragraph = document.getElementById("index-description");
     paragraph.setAttribute("class", "d-none");
+
+    let coverPic = document.getElementById("cover-pic");
+    coverPic.setAttribute("style", "height: 16em; width: 55em; object-fit: cover");
 }; 
 
 //creating a function to run while clicking the button
 function buttonClickAction () {
     let readMoreButton = document.getElementById("read-more-button");
     if (readMoreButton.innerHTML == "read more...") {
-        showMoreText();
+        expandTextAndPic();
         readMoreButton.innerHTML = "read less...";
     } else {
-        hideText();
+        collapseTextAndPic();
         readMoreButton.innerHTML = "read more...";
     }
 };
