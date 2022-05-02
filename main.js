@@ -238,10 +238,16 @@ function displayTable (festivalData) {
             let td3 = document.createElement("td");
             td3.innerHTML = festivalData[n]["bezirk"];
 
+            let td4 = document.createElement("td");
+            let festivalDetailButton = document.createElement("button");
+            // let festivalDetailButton = createFestivalDetailButton(festivalData[n]["bezeichnung"]);
+
             tr.appendChild(td1);
             td1.appendChild(eventLink);
             tr.appendChild(td2);
             tr.appendChild(td3);
+            td4.appendChild(festivalDetailButton);
+            tr.appendChild(td4);
             tableBody.appendChild(tr);
         }; 
     }; 
