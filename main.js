@@ -9,7 +9,7 @@
 //-> unified filter function (currently not in use)
 //-> add event listeners to the inputs
 //-> display table function for the street-festivals.html page
-
+//-> search for a festival function
 
 //-----END OF TABLE OF CONTENTS-----
 
@@ -218,6 +218,12 @@ function displayTable (festivalData) {
 
     //validating if user on the festival page
     if (tableBody != null) {
+        //hide the spinner
+        const spinner = document.getElementById("spinner");
+        spinner.classList.add("d-none");
+        //display table
+        const contentToDisplay = document.getElementById("content-to-display");
+        contentToDisplay.classList.remove("invisible");
         //setting the table content to empty - needed while updating filters
         tableBody.innerHTML = ""
         //creating table contents from the data
@@ -266,11 +272,9 @@ const searchFestival = async (searchTerm) => {
     const response = await fetch(searchUrl);
     const searchData = await response.json();
     const searchList = searchData.index;
-    //returning 3 items for search "Sommer"
-    // console.log(searchList);
     displayTable(searchList);
     } catch (error) {
-        console.log(`An error orrcured: ${error}`);
+        console.log(`Could not load your results for ${searchTerm}, an error orrcured: ${error}`);
     }
 };
 
