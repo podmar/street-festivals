@@ -55,6 +55,7 @@ fetch(url)
     .then(response => response.json())
     .then(data => {
         let festivalData = data.index; 
+        // console.log(festivalData);
         displayCards(festivalData);
         displayTable(festivalData);
         displayOptions(festivalData);
@@ -254,4 +255,26 @@ function displayTable (festivalData) {
 }; 
 
 //#endregion
-//
+//-----> search for a festival function
+//#region
+
+const searchFestival = async (searchTerm) => {
+    //url created correctly, for Sommer 3 results in index
+    const searchUrl = url+searchTerm;
+    // console.log(searchUrl);
+
+    try {
+    const response = await fetch(searchUrl);
+    console.log(response);
+    const searchData = await response.json();
+    console.log(searchData, typeof searchData);
+    const searchList = searchData.index;
+    console.log(searchList);
+    } catch (error) {
+        console.log(`An error orrcured: ${error}`);
+    }
+};
+
+displayTable(searchFestival("Sommer"));
+
+//#endregion
