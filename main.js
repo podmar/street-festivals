@@ -261,20 +261,19 @@ function displayTable (festivalData) {
 const searchFestival = async (searchTerm) => {
     //url created correctly, for Sommer 3 results in index
     const searchUrl = url+searchTerm;
-    // console.log(searchUrl);
 
     try {
     const response = await fetch(searchUrl);
-    console.log(response);
     const searchData = await response.json();
-    console.log(searchData, typeof searchData);
     const searchList = searchData.index;
-    console.log(searchList);
+    //returning 3 items for search "Sommer"
+    // console.log(searchList);
+    displayTable(searchList);
     } catch (error) {
         console.log(`An error orrcured: ${error}`);
     }
 };
 
-displayTable(searchFestival("Sommer"));
+searchFestival("Frühling");
 
 //#endregion
