@@ -28,7 +28,7 @@
 
             <div>
                 <form action="" class="d-flex">
-                    <input type="text" class="form-control me-2" placeholder="festival name">
+                    <input type="text" class="form-control me-2" placeholder="Find a festival..." id="search-input">
                     <button class="btn" type="submit">
                         <i class="bi bi-search"></i>
                     </button>
@@ -63,7 +63,12 @@
         </div>
     </div>
     
-    <div class="container">
+    <div class="row justify-content-center p-5" id="spinner">
+        <span class="visually-hidden">Loading...</span>
+        <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+    </div>
+    
+    <div class="container invisible">
         <p class="m-2">Discover street festivals in Berlin in 2022</p>
     </div>
     <div class="container row justify-content-between" id="card-container"></div>
