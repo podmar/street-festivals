@@ -64,10 +64,10 @@ fetch(url)
         displayTable(festivalData);
         displayOptions(festivalData);
         addEventListeners(festivalData);
+        searchByInput();
         })
     .catch((err) => console.log(err)); 
 
-    searchByInput();
     
 //#endregion
 
