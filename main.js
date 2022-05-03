@@ -10,6 +10,8 @@
 //-> add event listeners to the inputs
 //-> display table function for the street-festivals.html page
 //-> search for a festival function
+//-> adding event listeners to the search field
+
 
 //-----END OF TABLE OF CONTENTS-----
 
@@ -63,6 +65,8 @@ fetch(url)
         })
     .catch((err) => console.log(err)); 
 
+    gatherSearchInput();
+    
 //#endregion
 
 //-----> create event link function
@@ -218,7 +222,7 @@ function displayTable (festivalData) {
 
     //validating if user on the festival page
     if (tableBody != null) {
-        //hide the spinner
+        //hide the spinner with d-none, as I want the content to be displayed at the top of the page.
         const spinner = document.getElementById("spinner");
         spinner.classList.add("d-none");
         //display table
@@ -278,6 +282,26 @@ const searchFestival = async (searchTerm) => {
     }
 };
 
-searchFestival("Frühling");
+// searchFestival("Frühling");
+
+//#endregion
+//-----> adding event listeners to the search field
+//#region
+function gatherSearchInput () {
+    const searchInput = document.getElementById("search-input");
+    let searchTerm = "";
+
+    searchInput.addEventListener("change", (event) => {
+        searchTerm = event.target.value;
+        console.log(`The search term is: ${searchTerm}`);
+    });
+    searchInput.addEventListener("keyup", (event) => {
+        if (event.key === "Enter") {
+            searchFestival(searchTerm);
+            console.log(`Saerching for: ${searchTerm}`);
+
+        };
+    });
+};
 
 //#endregion
