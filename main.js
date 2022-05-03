@@ -11,6 +11,8 @@
 //-> display table function for the street-festivals.html page
 //-> search for a festival function
 //-> adding event listeners to the search field
+//-> XXX
+
 
 
 //-----END OF TABLE OF CONTENTS-----
@@ -49,7 +51,7 @@ function buttonClickAction () {
 };
 
 //#endregion
-//-----> controller function: fetching data, creating cards, table & filters
+//-----> controller function: fetching data, creating cards, table & filters, enabling search by input
 //#region
 let url = "https://www.berlin.de/sen/web/service/maerkte-feste/strassen-volksfeste/index.php/index/all.json?q="
 
@@ -303,9 +305,15 @@ function searchByInput () {
         if (event.key === "Enter") {
             searchFestival(searchTerm);
             console.log(`Searching for: ${searchTerm}`);
-
+            searchInput.value = "";
         };
     });
 };
+
+//#endregion
+//-----> XXX
+//#region
+
+
 
 //#endregion
