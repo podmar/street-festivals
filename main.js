@@ -65,7 +65,7 @@ fetch(url)
         })
     .catch((err) => console.log(err)); 
 
-    gatherSearchInput();
+    searchByInput();
     
 //#endregion
 
@@ -290,7 +290,7 @@ const searchFestival = async (searchTerm) => {
 //#endregion
 //-----> adding event listeners to the search field
 //#region
-function gatherSearchInput () {
+function searchByInput () {
     const searchInput = document.getElementById("search-input");
     let searchTerm = "";
 
@@ -298,10 +298,11 @@ function gatherSearchInput () {
         searchTerm = event.target.value;
         console.log(`The search term is: ${searchTerm}`);
     });
+
     searchInput.addEventListener("keyup", (event) => {
         if (event.key === "Enter") {
             searchFestival(searchTerm);
-            console.log(`Saerching for: ${searchTerm}`);
+            console.log(`Searching for: ${searchTerm}`);
 
         };
     });
