@@ -11,7 +11,8 @@
 //-> display table function for the street-festivals.html page
 //-> search for a festival function
 //-> adding event listeners to the search field
-//-> XXX
+//-> DOM and filter clearing functions
+//-> 
 
 
 
@@ -309,7 +310,7 @@ function searchByInput () {
 };
 
 //#endregion
-//-----> XXX
+//-----> DOM and filter clearing functions
 //#region
 
 //clear the search fields
