@@ -234,7 +234,7 @@ function displayTable (festivalData) {
         const contentToDisplay = document.getElementById("content-to-display");
         contentToDisplay.classList.remove("invisible");
         //setting the table content to empty - needed while updating filters
-        tableBody.innerHTML = ""
+        clearDOM();
         //creating table contents from the data
         for (let n = 0; n < festivalData.length; n++) {
             let tr = document.createElement("tr");
@@ -296,16 +296,15 @@ function searchByInput () {
     const searchInput = document.getElementById("search-input");
     let searchTerm = "";
 
+    //recording input
     searchInput.addEventListener("change", (event) => {
         searchTerm = event.target.value;
-        console.log(`The search term is: ${searchTerm}`);
     });
 
+    //fetching data according to search word after uses presses enter
     searchInput.addEventListener("keyup", (event) => {
         if (event.key === "Enter") {
             searchFestival(searchTerm);
-            console.log(`Searching for: ${searchTerm}`);
-            searchInput.value = "";
         };
     });
 };
@@ -314,6 +313,23 @@ function searchByInput () {
 //-----> XXX
 //#region
 
+function clearDOM () {
 
+    //clear the search field
+    if (document.getElementById("search-input") != null) {
+        document.getElementById("search-input").value = "";
+    };
+    if (document.getElementById("table-body") != null) {
+        document.getElementById("table-body").innerHTML = "";
+    }; 
+};
+
+function clearSearchFields () {
+    if (document.getElementById("neighbourhoodSelect") != null) {
+        document.getElementById("neighbourhoodSelect").value = "";
+        document.getElementById("monthInput").value = "";
+    }; 
+
+};
 
 //#endregion
