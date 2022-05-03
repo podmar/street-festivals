@@ -68,7 +68,6 @@ fetch(url)
         })
     .catch((err) => console.log(err)); 
 
-    
 //#endregion
 
 //-----> create event link function
@@ -274,20 +273,20 @@ function displayTable (festivalData) {
 //#region
 
 const searchFestival = async (searchTerm) => {
-    //url created correctly, for Sommer 3 results in index
     const searchUrl = url+searchTerm;
 
     try {
     const response = await fetch(searchUrl);
     const searchData = await response.json();
     const searchList = searchData.index;
+    clearSearchFields();
+    displayOptions(searchList);
+    addEventListeners(searchList);
     displayTable(searchList);
     } catch (error) {
         console.log(`Could not load your results for ${searchTerm}, an error orrcured: ${error}`);
     }
 };
-
-// searchFestival("Frühling");
 
 //#endregion
 //-----> adding event listeners to the search field
@@ -313,9 +312,9 @@ function searchByInput () {
 //-----> XXX
 //#region
 
+//clear the search fields
 function clearDOM () {
 
-    //clear the search field
     if (document.getElementById("search-input") != null) {
         document.getElementById("search-input").value = "";
     };
@@ -324,12 +323,19 @@ function clearDOM () {
     }; 
 };
 
+//clearing the search fields
 function clearSearchFields () {
-    if (document.getElementById("neighbourhoodSelect") != null) {
-        document.getElementById("neighbourhoodSelect").value = "";
+    const neighbourhoodSelect = document.getElementById("neighbourhoodSelect")
+
+    if (neighbourhoodSelect != null) {
+        neighbourhoodSelect.innerHTML = "";
+        let allOption = document.createElement("option");
+        allOption.value = "all";
+        allOption.innerText = "All";
+        neighbourhoodSelect.appendChild(allOption);
+
         document.getElementById("monthInput").value = "";
     }; 
-
 };
 
 //#endregion
