@@ -89,6 +89,9 @@ function displayCards (festivalData) {
 
     //validating if user on the main page
     if (cardContainer != null) {
+        //hide the spinner with d-none, as I want the content to be displayed at the top of the page.
+        const spinner = document.getElementById("spinner");
+        spinner.classList.add("d-none");
         //generating cards
         for (let i = 0; i < 6; i++) {
 
