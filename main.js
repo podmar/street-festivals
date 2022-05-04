@@ -18,30 +18,31 @@
 
 //-----END OF TABLE OF CONTENTS-----
 
+//INDEX PAGE
 //-----> read more button on the main page
 //#region
 
 //function to expand the text on the main page
 function expandTextAndPic () {
-    let paragraph = document.getElementById("index-description");
+    const paragraph = document.getElementById("index-description");
     paragraph.removeAttribute("class");
 
-    let coverPic = document.getElementById("cover-pic");
+    const coverPic = document.getElementById("cover-pic");
     coverPic.setAttribute("style", "height: 22em; width: 55em; object-fit: cover");
 };
 
 //function to hide the text on the main page
 function collapseTextAndPic () {    
-    let paragraph = document.getElementById("index-description");
+    const paragraph = document.getElementById("index-description");
     paragraph.setAttribute("class", "d-none");
 
-    let coverPic = document.getElementById("cover-pic");
+    const coverPic = document.getElementById("cover-pic");
     coverPic.setAttribute("style", "height: 16em; width: 55em; object-fit: cover");
 }; 
 
 //creating a function to run while clicking the button
 function buttonClickAction () {
-    let readMoreButton = document.getElementById("read-more-button");
+    const readMoreButton = document.getElementById("read-more-button");
     if (readMoreButton.innerHTML == "read more...") {
         expandTextAndPic();
         readMoreButton.innerHTML = "read less...";
@@ -60,7 +61,6 @@ fetch(url)
     .then(response => response.json())
     .then(data => {
         let festivalData = data.index; 
-        // console.log(festivalData);
         displayCards(festivalData);
         displayTable(festivalData);
         displayOptions(festivalData);
@@ -73,8 +73,8 @@ fetch(url)
 //-----> create event link function
 //#region
 function createEventLink (festivalData, i) {
-    let eventLink = document.createElement("a");
-    let linkLocation = festivalData[i]["www"];
+    const eventLink = document.createElement("a");
+    const linkLocation = festivalData[i]["www"];
     // console.log(linkLocation);
     eventLink.setAttribute("href", linkLocation);
     eventLink.classList.add("text-decoration-none", "text-reset");
@@ -86,7 +86,7 @@ function createEventLink (festivalData, i) {
 //#region
 
 function displayCards (festivalData) {
-    let cardContainer = document.getElementById("card-container");
+    const cardContainer = document.getElementById("card-container");
 
     //validating if user on the main page
     if (cardContainer != null) {
@@ -96,22 +96,22 @@ function displayCards (festivalData) {
         //generating cards
         for (let i = 0; i < 6; i++) {
 
-        let cardBox = document.createElement("div");
+        const cardBox = document.createElement("div");
         cardBox.classList.add("col-lg-4", "col-md-6", "p-2", "container");
         
-        let card = document.createElement("div");
+        const card = document.createElement("div");
         card.classList.add("card");
         card.setAttribute("style", "height: 10rem");
 
-        let cardBody = document.createElement("div");
+        const cardBody = document.createElement("div");
         cardBody.setAttribute("class", "card-body");
 
-        let cardTitle = document.createElement("h5");
+        const cardTitle = document.createElement("h5");
         cardTitle.setAttribute("class", "card-title");
 
-        let eventLink = createEventLink(festivalData, i);
+        const eventLink = createEventLink(festivalData, i);
         
-        let cardText = document.createElement("p");
+        const cardText = document.createElement("p");
         cardText.setAttribute("class", "card-text");
         cardText.innerText = `${festivalData[i]["strasse"]} on ${festivalData[i]["von"]} until ${festivalData[i]["bis"]}.`;
         
@@ -131,7 +131,7 @@ function displayCards (festivalData) {
 
 function displayOptions (festivalData) {
     //locating the select container for the options
-    let select = document.getElementById("neighbourhoodSelect");
+    const select = document.getElementById("neighbourhoodSelect");
 
     // console.log(select != null);
 
@@ -152,12 +152,12 @@ function displayOptions (festivalData) {
     };
 };
 //#endregion
-//-----> filter by neighbourhood / month + controller
+//-----> functions to filter by neighbourhood / month + controller
 //#region
 
 //-> filter by neighbourhood select
 function filterByNeighbourhood (festivalData) {
-    let neighbourhood = document.getElementById("neighbourhoodSelect").value;
+    const neighbourhood = document.getElementById("neighbourhoodSelect").value;
     let filteredByNeighbourhood = festivalData.filter(festival => 
         festival.bezirk === neighbourhood || neighbourhood === "all");
     displayTable(filteredByNeighbourhood);
@@ -166,7 +166,7 @@ function filterByNeighbourhood (festivalData) {
 
 //-> filter by month input
 function filterByMonth (festivalData) {
-    let pickedMonth = document.getElementById("monthInput").value;
+    const pickedMonth = document.getElementById("monthInput").value;
     let filteredByMonth = festivalData.filter(festival => new Date(festival.von).getMonth() === new Date(pickedMonth).getMonth() || pickedMonth === "");
     displayTable(filteredByMonth);
     return filteredByMonth;
@@ -228,9 +228,7 @@ function addEventListeners (festivalData) {
 
 function displayTable (festivalData) {
     // locating the table body
-    // let tableHeader = document.getElementById("table-header");
-    let tableBody = document.getElementById("table-body");
-    // let notification = document.getElementById("no-results-notification");
+    const tableBody = document.getElementById("table-body");
 
     //validating if user on the festival page
     if (tableBody != null) {
@@ -244,25 +242,25 @@ function displayTable (festivalData) {
         clearDOM();
         //creating table contents from the data
         for (let n = 0; n < festivalData.length; n++) {
-            let tr = document.createElement("tr");
+            const tr = document.createElement("tr");
 
-            let td1 = document.createElement("td");
-            let eventLink = createEventLink(festivalData, n);
+            const td1 = document.createElement("td");
+            const eventLink = createEventLink(festivalData, n);
             // td1.innerHTML = festivalData[n]["bezeichnung"];
 
-            let td2 = document.createElement("td");
-            let date = new Date(festivalData[n]["von"]).toLocaleDateString("en-GB", {
+            const td2 = document.createElement("td");
+            const date = new Date(festivalData[n]["von"]).toLocaleDateString("en-GB", {
                 day: "numeric",
                 month: "long",
                 year: "numeric",
               });
             td2.innerHTML = date;
 
-            let td3 = document.createElement("td");
+            const td3 = document.createElement("td");
             td3.innerHTML = festivalData[n]["bezirk"];
 
-            let td4 = document.createElement("td");
-            let festivalDetailButton = document.createElement("button");
+            const td4 = document.createElement("td");
+            const festivalDetailButton = document.createElement("button");
             // let festivalDetailButton = createFestivalDetailButton(festivalData[n]["bezeichnung"]);
 
             tr.appendChild(td1);
@@ -280,14 +278,13 @@ function displayTable (festivalData) {
 //-----> function for no results notification
 
 function displayNoResultsNotification (numberOfResults) {
-        let tableHeader = document.getElementById("table-header");
-        let tableBody = document.getElementById("table-body");
-        let notification = document.getElementById("no-results-notification");
+        const tableHeader = document.getElementById("table-header");
+        const tableBody = document.getElementById("table-body");
+        const notification = document.getElementById("no-results-notification");
         
         if (!numberOfResults) {
             notification.classList.remove("d-none");
             tableHeader.classList.add("d-none");
-            // console.log(tableHeader);
         } else {
             tableHeader.classList.remove("d-none");
             notification.classList.add("d-none");
@@ -371,7 +368,7 @@ function clearSearchFields () {
 
     if (neighbourhoodSelect != null) {
         neighbourhoodSelect.innerHTML = "";
-        let allOption = document.createElement("option");
+        const allOption = document.createElement("option");
         allOption.value = "all";
         allOption.innerText = "All";
         neighbourhoodSelect.appendChild(allOption);
