@@ -171,7 +171,6 @@ function filterByMonth (festivalData) {
     let pickedMonth = document.getElementById("monthInput").value;
     let filteredByMonth = festivalData.filter(festival => new Date(festival.von).getMonth() === new Date(pickedMonth).getMonth() || pickedMonth === "");
     displayTable(filteredByMonth);
-    //console.log(filteredByMonth);
     return filteredByMonth;
 };
 
@@ -302,6 +301,7 @@ const searchFestival = async (searchTerm) => {
     displayOptions(searchList);
     addEventListeners(searchList);
     displayTable(searchList);
+    addAllResultsButton();
     } catch (error) {
         console.log(`Could not load your results for ${searchTerm}, an error orrcured: ${error}`);
     }
@@ -326,6 +326,21 @@ function searchByInput () {
         };
     });
 };
+
+//#endregion
+//-----> see all results functionality for the dynamic search (page reload)
+//#region
+
+function addAllResultsButton () {
+    const button = document.querySelector("#all-results-button");
+
+    const refreshPage = () => {
+    location.reload();
+    }; 
+
+    button.addEventListener('click', refreshPage)
+    button.classList.remove("d-none")
+}
 
 //#endregion
 //-----> DOM and filter clearing functions
