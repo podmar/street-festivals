@@ -80,16 +80,17 @@
     
         <div class="container p-3">
             <table class="table table-hover">
-                <thead class="thead-light" id="table-header"></thead>
-                <th>Name</th>
-                <th>Date</th>
-                <th>Neighbourhood</th>
-                <th></th>
+                <thead class="thead-light" id="table-header">
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Neighbourhood</th>
+                    <th></th>
+                </thead>
                 <tbody id="table-body"></tbody>
             </table>
         </div>
 
-        <div class="container p-3 d-flex d-none">
+        <div class="container p-3 d-flex d-none" id="no-results-notification">
             <i class="bi bi-slash-circle-fill me-2"></i>
             <p>Your search gave no results, try again.</p>
         </div>
