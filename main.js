@@ -1,25 +1,48 @@
 //-----TABLE OF CONTENTS-----
-//-> read more button on the main page
-//-> controller function: fetching data, creating cards, table & filters
+//I CONTROLLER
+//-> controller function: fetching data, creating cards, table & filters, enabling dynamic search by input
+
+//II INDEX PAGE
+//-> read more button on the index page
 //-> create event link function
 //-> display cards function for the index.html page
-//-> display select options for the filters on street-festivals.html page
-//-> filter by neighbourhood select
-//-> filter by month input
-//-> unified filter function (currently not in use)
-//-> add event listeners to the inputs
-//-> display table function for the street-festivals.html page and a function for no results notification
-//-> dynamic search for a festival function  (controller)
-//-> adding event listeners to the search field
-//-> DOM and filter clearing functions
-//-> 
 
+//III STREET-FESTIVALS PAGE
+//-> display select options for the filters on street-festivals.html page
+//-> functions to filter by neighbourhood / month + controller
+//-> add event listeners to the filter inputs
+//-> display table function for the street-festivals.html page and a function for no results notification
+
+//IV DYNAMIC SEARCH
+//-> dynamic search for a festival function (controller & fetch)
+//-> adding event listeners to the search field
+//-> see all results functionality for the dynamic search (page reload)
+//-> search and filter clearing functions
 
 
 //-----END OF TABLE OF CONTENTS-----
 
-//INDEX PAGE
-//-----> read more button on the main page
+//I CONTROLLER
+//-> controller function: fetching data, creating cards, table & filters, enabling dynamic search by input
+//#region
+let url = "https://www.berlin.de/sen/web/service/maerkte-feste/strassen-volksfeste/index.php/index/all.json?q="
+
+fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        let festivalData = data.index; 
+        displayCards(festivalData);
+        displayTable(festivalData);
+        displayOptions(festivalData);
+        addEventListeners(festivalData);
+        searchByInput();
+        })
+    .catch((err) => console.log(err)); 
+
+//#endregion
+
+//II INDEX PAGE
+//-> read more button on the index page
 //#region
 
 //function to expand the text on the main page
@@ -53,24 +76,7 @@ function buttonClickAction () {
 };
 
 //#endregion
-//-----> controller function: fetching data, creating cards, table & filters, enabling search by input
-//#region
-let url = "https://www.berlin.de/sen/web/service/maerkte-feste/strassen-volksfeste/index.php/index/all.json?q="
-
-fetch(url)
-    .then(response => response.json())
-    .then(data => {
-        let festivalData = data.index; 
-        displayCards(festivalData);
-        displayTable(festivalData);
-        displayOptions(festivalData);
-        addEventListeners(festivalData);
-        searchByInput();
-        })
-    .catch((err) => console.log(err)); 
-
-//#endregion
-//-----> create event link function
+//-> create event link function
 //#region
 function createEventLink (festivalData, i) {
     const eventLink = document.createElement("a");
@@ -82,7 +88,7 @@ function createEventLink (festivalData, i) {
     return eventLink;
 };
 //#endregion
-//-----> display cards function for the index.html page
+//-> display cards function for the index.html page
 //#region
 
 function displayCards (festivalData) {
@@ -126,7 +132,9 @@ function displayCards (festivalData) {
 };
 
 //#endregion
-//-----> display select options for the filters on street-festivals.html page
+
+//III STREET-FESTIVALS PAGE
+//-> display select options for the filters on street-festivals.html page
 //#region
 
 function displayOptions (festivalData) {
@@ -152,7 +160,7 @@ function displayOptions (festivalData) {
     };
 };
 //#endregion
-//-----> functions to filter by neighbourhood / month + controller
+//-> functions to filter by neighbourhood / month + controller
 //#region
 
 //-> filter by neighbourhood select
@@ -187,7 +195,7 @@ function filterThemAll(festivalData) {
 };
 
 //#endregion
-//-----> add event listeners to the filter inputs
+//-> add event listeners to the filter inputs
 //#region
 
 //-> with a main filter controller function
@@ -223,7 +231,7 @@ function addEventListeners (festivalData) {
 //             });
 
 //#endregion
-//-----> display table function for the street-festivals.html page and a function for no results notification
+//-> display table function for the street-festivals.html page and a function for no results notification
 //#region
 
 function displayTable (festivalData) {
@@ -239,7 +247,7 @@ function displayTable (festivalData) {
         const contentToDisplay = document.getElementById("content-to-display");
         contentToDisplay.classList.remove("invisible");
         //setting the table content to empty - needed while updating filters
-        clearDOM();
+        clearDynamicSearch();
         //creating table contents from the data
         for (let n = 0; n < festivalData.length; n++) {
             const tr = document.createElement("tr");
@@ -275,8 +283,7 @@ function displayTable (festivalData) {
     let numberOfResults = tableBody.childElementCount;
     displayNoResultsNotification(numberOfResults);
 }; 
-//-----> function for no results notification
-
+//-> function for no results notification
 function displayNoResultsNotification (numberOfResults) {
         const tableHeader = document.getElementById("table-header");
         const tableBody = document.getElementById("table-body");
@@ -292,9 +299,10 @@ function displayNoResultsNotification (numberOfResults) {
 };
 
 //#endregion
-//-----> dynamic search for a festival function (controller)
-//#region
 
+//IV DYNAMIC SEARCH
+//-> dynamic search for a festival function (controller & fetch)
+//#region
 const searchFestival = async (searchTerm) => {
     const searchUrl = url+searchTerm;
 
@@ -302,7 +310,7 @@ const searchFestival = async (searchTerm) => {
     const response = await fetch(searchUrl);
     const searchData = await response.json();
     const searchList = searchData.index;
-    clearSearchFields();
+    clearFilters();
     displayOptions(searchList);
     addEventListeners(searchList);
     displayTable(searchList);
@@ -313,7 +321,7 @@ const searchFestival = async (searchTerm) => {
 };
 
 //#endregion
-//-----> adding event listeners to the search field
+//-> adding event listeners to the search field
 //#region
 function searchByInput () {
     const searchInput = document.getElementById("search-input");
@@ -333,9 +341,8 @@ function searchByInput () {
 };
 
 //#endregion
-//-----> see all results functionality for the dynamic search (page reload)
+//-> see all results functionality for the dynamic search (page reload)
 //#region
-
 function addAllResultsButton () {
     const button = document.querySelector("#all-results-button");
 
@@ -345,14 +352,13 @@ function addAllResultsButton () {
 
     button.addEventListener('click', refreshPage)
     button.classList.remove("d-none")
-}
+};
 
 //#endregion
-//-----> DOM and filter clearing functions
+//-> search and filter clearing functions
 //#region
-
 //clear the search fields
-function clearDOM () {
+function clearDynamicSearch () {
 
     if (document.getElementById("search-input") != null) {
         document.getElementById("search-input").value = "";
@@ -362,8 +368,8 @@ function clearDOM () {
     }; 
 };
 
-//clearing the search fields
-function clearSearchFields () {
+//clearing the filter input fields and values
+function clearFilters () {
     const neighbourhoodSelect = document.getElementById("neighbourhoodSelect")
 
     if (neighbourhoodSelect != null) {
