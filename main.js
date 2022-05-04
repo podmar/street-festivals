@@ -8,7 +8,7 @@
 //-> filter by month input
 //-> unified filter function (currently not in use)
 //-> add event listeners to the inputs
-//-> display table function for the street-festivals.html page
+//-> display table function for the street-festivals.html page and a function for no results notification
 //-> dynamic search for a festival function  (controller)
 //-> adding event listeners to the search field
 //-> DOM and filter clearing functions
@@ -216,14 +216,14 @@ function addEventListeners (festivalData) {
 };
 
 //#endregion
-//-----> display table function for the street-festivals.html page
+//-----> display table function for the street-festivals.html page and a function for no results notification
 //#region
 
 function displayTable (festivalData) {
-    // locating table header and table body
-    let tableHeader = document.getElementById("table-header");
+    // locating the table body
+    // let tableHeader = document.getElementById("table-header");
     let tableBody = document.getElementById("table-body");
-    let notification = document.getElementById("no-results-notification");
+    // let notification = document.getElementById("no-results-notification");
 
     //validating if user on the festival page
     if (tableBody != null) {
@@ -268,34 +268,23 @@ function displayTable (festivalData) {
         }; 
     }; 
     let numberOfResults = tableBody.childElementCount;
-    console.log(numberOfResults);
-    // displayNoResultsNotification(numberOfResults);
+    displayNoResultsNotification(numberOfResults);
+}; 
+//-----> function for no results notification
 
+function displayNoResultsNotification (numberOfResults) {
+        let tableHeader = document.getElementById("table-header");
+        let tableBody = document.getElementById("table-body");
+        let notification = document.getElementById("no-results-notification");
+        
         if (!numberOfResults) {
-            // let table = document.getElementsByID("table");
             notification.classList.remove("d-none");
             tableHeader.classList.add("d-none");
-
-            console.log(tableHeader);
+            // console.log(tableHeader);
         } else {
             tableHeader.classList.remove("d-none");
             notification.classList.add("d-none");
         };
-    
-
-        
-}; 
-//-----> no results notification
-
-function displayNoResultsNotification (resultNumber) {
-    if (resultNumber === 0) {
-        let table = document.getElementsByTagName("table");
-        table.classList.add("invisible")
-    };
-    let content = document.getElementById("content-to-display");
-
-    let notification = document.createElement("p");
-    content.appendChild(notification);
 };
 
 //#endregion
