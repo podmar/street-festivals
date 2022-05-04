@@ -152,9 +152,10 @@ function displayOptions (festivalData) {
     };
 };
 //#endregion
-//-----> filter by neighbourhood select
+//-----> filter by neighbourhood / month + controller
 //#region
 
+//-> filter by neighbourhood select
 function filterByNeighbourhood (festivalData) {
     let neighbourhood = document.getElementById("neighbourhoodSelect").value;
     let filteredByNeighbourhood = festivalData.filter(festival => 
@@ -163,10 +164,7 @@ function filterByNeighbourhood (festivalData) {
     return filteredByNeighbourhood;
 };
 
-//#endregion
-//-----> filter by month input
-//#region
-
+//-> filter by month input
 function filterByMonth (festivalData) {
     let pickedMonth = document.getElementById("monthInput").value;
     let filteredByMonth = festivalData.filter(festival => new Date(festival.von).getMonth() === new Date(pickedMonth).getMonth() || pickedMonth === "");
@@ -174,45 +172,55 @@ function filterByMonth (festivalData) {
     return filteredByMonth;
 };
 
+//-> filter controller function 
+function filterThemAll(festivalData) {
+    const month = document.getElementById("monthInput").value;
+    const neighbourhood = document.getElementById("neighbourhoodSelect").value;
+
+    if (!month) {
+        filterByNeighbourhood(festivalData);
+    } else if (neighbourhood === "all") {
+        filterByMonth(festivalData);
+    } else {
+        filterByNeighbourhood(filterByMonth(festivalData))
+    };
+};
+
 //#endregion
-//-----> unified filter function (currently not in use)
+//-----> add event listeners to the filter inputs
 //#region
 
-// function filterThemAll(festivalData) {
-//     if (document.getElementById("monthInput").value === "") {
-//         filterByNeighbourhood(festivalData);
-//     } else if (document.getElementById("neighbourhoodSelect").value === "all") {
-//         filterByMonth(festivalData);
-//     } else {
-//         filterByNeighbourhood(filterByMonth(festivalData))
-//     };
-// };
-
-//#endregion
-//-----> add event listeners to the inputs
-//#region
-
+//-> with a main filter controller function
 function addEventListeners (festivalData) {
     //validating if user on the festival page
     if (document.getElementById("table-header") != null) {
         document.getElementById("neighbourhoodSelect")
-            .addEventListener("change", function event () {
-                if (document.getElementById("monthInput").value === "") {
-                    filterByNeighbourhood(festivalData); 
-                } else {
-                    filterByNeighbourhood(filterByMonth(festivalData))
-                };
-            });
+            .addEventListener("change", filterThemAll(festivalData));
         document.getElementById("monthInput")
-            .addEventListener("change", function event () {
-                if (document.getElementById("neighbourhoodSelect").value === "all") {
-                    filterByMonth(festivalData);
-                } else {
-                    filterByMonth(filterByNeighbourhood(festivalData));
-                };
-            });
+            .addEventListener("change", filterThemAll(festivalData));
     };
 };
+
+//-> without a main filter controller function
+// function addEventListeners (festivalData) {
+//     //validating if user on the festival page
+//     if (document.getElementById("table-header") != null) {
+//         document.getElementById("neighbourhoodSelect")
+//             .addEventListener("change", function event () {
+//                 if (document.getElementById("monthInput").value === "") {
+//                     filterByNeighbourhood(festivalData); 
+//                 } else {
+//                     filterByNeighbourhood(filterByMonth(festivalData))
+//                 };
+//             });
+//         document.getElementById("monthInput")
+//             .addEventListener("change", function event () {
+//                 if (document.getElementById("neighbourhoodSelect").value === "all") {
+//                     filterByMonth(festivalData);
+//                 } else {
+//                     filterByMonth(filterByNeighbourhood(festivalData));
+//                 };
+//             });
 
 //#endregion
 //-----> display table function for the street-festivals.html page and a function for no results notification
