@@ -9,7 +9,7 @@
 //-> unified filter function (currently not in use)
 //-> add event listeners to the inputs
 //-> display table function for the street-festivals.html page
-//-> search for a festival function
+//-> dynamic search for a festival function  (controller)
 //-> adding event listeners to the search field
 //-> DOM and filter clearing functions
 //-> 
@@ -70,7 +70,6 @@ fetch(url)
     .catch((err) => console.log(err)); 
 
 //#endregion
-
 //-----> create event link function
 //#region
 function createEventLink (festivalData, i) {
@@ -224,6 +223,7 @@ function displayTable (festivalData) {
     // locating table header and table body
     let tableHeader = document.getElementById("table-header");
     let tableBody = document.getElementById("table-body");
+    let notification = document.getElementById("no-results-notification");
 
     //validating if user on the festival page
     if (tableBody != null) {
@@ -267,10 +267,39 @@ function displayTable (festivalData) {
             tableBody.appendChild(tr);
         }; 
     }; 
+    let numberOfResults = tableBody.childElementCount;
+    console.log(numberOfResults);
+    // displayNoResultsNotification(numberOfResults);
+
+        if (!numberOfResults) {
+            // let table = document.getElementsByID("table");
+            notification.classList.remove("d-none");
+            tableHeader.classList.add("d-none");
+
+            console.log(tableHeader);
+        } else {
+            tableHeader.classList.remove("d-none");
+            notification.classList.add("d-none");
+        };
+    
+
+        
 }; 
+//-----> no results notification
+
+function displayNoResultsNotification (resultNumber) {
+    if (resultNumber === 0) {
+        let table = document.getElementsByTagName("table");
+        table.classList.add("invisible")
+    };
+    let content = document.getElementById("content-to-display");
+
+    let notification = document.createElement("p");
+    content.appendChild(notification);
+};
 
 //#endregion
-//-----> search for a festival function
+//-----> dynamic search for a festival function (controller)
 //#region
 
 const searchFestival = async (searchTerm) => {
