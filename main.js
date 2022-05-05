@@ -1,47 +1,77 @@
 //-----TABLE OF CONTENTS-----
-//-> read more button on the main page
-//-> controller function: fetching data, creating cards, table & filters
+//I CONTROLLER
+//-> controller function: fetching data, creating cards, table & filters, enabling dynamic search by input
+
+//II INDEX PAGE
+//-> read more button on the index page
 //-> create event link function
 //-> display cards function for the index.html page
-//-> display select options for the filters on street-festivals.html page
-//-> filter by neighbourhood select
-//-> filter by month input
-//-> unified filter function (currently not in use)
-//-> add event listeners to the inputs
-//-> display table function for the street-festivals.html page and a function for no results notification
-//-> dynamic search for a festival function  (controller)
-//-> adding event listeners to the search field
-//-> DOM and filter clearing functions
-//-> 
 
+//III STREET-FESTIVALS PAGE
+//-> display select options for the filters on street-festivals.html page
+//-> functions to filter by neighbourhood / month + controller
+//-> add event listeners to the filter inputs
+//-> display table function for the street-festivals.html page and a function for no results notification
+
+//IV DYNAMIC SEARCH
+//-> dynamic search for a festival function (controller & fetch)
+//-> adding event listeners to the search field
+//-> see all results functionality for the dynamic search (page reload)
+//-> search and filter clearing functions
 
 
 //-----END OF TABLE OF CONTENTS-----
 
-//-----> read more button on the main page
+//I CONTROLLER
+//-> controller function: fetching data, creating cards, table & filters, enabling dynamic search by input
+//#region
+let url = "https://www.berlin.de/sen/web/service/maerkte-feste/strassen-volksfeste/index.php/index/all.json?q="
+
+fetch(url)
+    .then(response => response.json())
+
+    // .then(response => {
+    //     response.json();
+    //     console.log(response)})
+
+    .then(data => {
+        // console.log(data);
+        let festivalData = data.index; 
+        displayCards(festivalData);
+        displayTable(festivalData);
+        displayOptions(festivalData);
+        addEventListeners(festivalData);
+        searchByInput();
+        })
+    .catch((err) => console.log(err)); 
+
+//#endregion
+
+//II INDEX PAGE
+//-> read more button on the index page
 //#region
 
 //function to expand the text on the main page
 function expandTextAndPic () {
-    let paragraph = document.getElementById("index-description");
+    const paragraph = document.getElementById("index-description");
     paragraph.removeAttribute("class");
 
-    let coverPic = document.getElementById("cover-pic");
+    const coverPic = document.getElementById("cover-pic");
     coverPic.setAttribute("style", "height: 22em; width: 55em; object-fit: cover");
 };
 
 //function to hide the text on the main page
 function collapseTextAndPic () {    
-    let paragraph = document.getElementById("index-description");
+    const paragraph = document.getElementById("index-description");
     paragraph.setAttribute("class", "d-none");
 
-    let coverPic = document.getElementById("cover-pic");
+    const coverPic = document.getElementById("cover-pic");
     coverPic.setAttribute("style", "height: 16em; width: 55em; object-fit: cover");
 }; 
 
 //creating a function to run while clicking the button
 function buttonClickAction () {
-    let readMoreButton = document.getElementById("read-more-button");
+    const readMoreButton = document.getElementById("read-more-button");
     if (readMoreButton.innerHTML == "read more...") {
         expandTextAndPic();
         readMoreButton.innerHTML = "read less...";
@@ -52,29 +82,11 @@ function buttonClickAction () {
 };
 
 //#endregion
-//-----> controller function: fetching data, creating cards, table & filters, enabling search by input
-//#region
-let url = "https://www.berlin.de/sen/web/service/maerkte-feste/strassen-volksfeste/index.php/index/all.json?q="
-
-fetch(url)
-    .then(response => response.json())
-    .then(data => {
-        let festivalData = data.index; 
-        // console.log(festivalData);
-        displayCards(festivalData);
-        displayTable(festivalData);
-        displayOptions(festivalData);
-        addEventListeners(festivalData);
-        searchByInput();
-        })
-    .catch((err) => console.log(err)); 
-
-//#endregion
-//-----> create event link function
+//-> create event link function
 //#region
 function createEventLink (festivalData, i) {
-    let eventLink = document.createElement("a");
-    let linkLocation = festivalData[i]["www"];
+    const eventLink = document.createElement("a");
+    const linkLocation = festivalData[i]["www"];
     // console.log(linkLocation);
     eventLink.setAttribute("href", linkLocation);
     eventLink.classList.add("text-decoration-none", "text-reset");
@@ -82,11 +94,11 @@ function createEventLink (festivalData, i) {
     return eventLink;
 };
 //#endregion
-//-----> display cards function for the index.html page
+//-> display cards function for the index.html page
 //#region
 
 function displayCards (festivalData) {
-    let cardContainer = document.getElementById("card-container");
+    const cardContainer = document.getElementById("card-container");
 
     //validating if user on the main page
     if (cardContainer != null) {
@@ -96,22 +108,22 @@ function displayCards (festivalData) {
         //generating cards
         for (let i = 0; i < 6; i++) {
 
-        let cardBox = document.createElement("div");
+        const cardBox = document.createElement("div");
         cardBox.classList.add("col-lg-4", "col-md-6", "p-2", "container");
         
-        let card = document.createElement("div");
+        const card = document.createElement("div");
         card.classList.add("card");
         card.setAttribute("style", "height: 10rem");
 
-        let cardBody = document.createElement("div");
+        const cardBody = document.createElement("div");
         cardBody.setAttribute("class", "card-body");
 
-        let cardTitle = document.createElement("h5");
+        const cardTitle = document.createElement("h5");
         cardTitle.setAttribute("class", "card-title");
 
-        let eventLink = createEventLink(festivalData, i);
+        const eventLink = createEventLink(festivalData, i);
         
-        let cardText = document.createElement("p");
+        const cardText = document.createElement("p");
         cardText.setAttribute("class", "card-text");
         cardText.innerText = `${festivalData[i]["strasse"]} on ${festivalData[i]["von"]} until ${festivalData[i]["bis"]}.`;
         
@@ -126,12 +138,14 @@ function displayCards (festivalData) {
 };
 
 //#endregion
-//-----> display select options for the filters on street-festivals.html page
+
+//III STREET-FESTIVALS PAGE
+//-> display select options for the filters on street-festivals.html page
 //#region
 
 function displayOptions (festivalData) {
     //locating the select container for the options
-    let select = document.getElementById("neighbourhoodSelect");
+    const select = document.getElementById("neighbourhoodSelect");
 
     // console.log(select != null);
 
@@ -152,12 +166,13 @@ function displayOptions (festivalData) {
     };
 };
 //#endregion
-//-----> filter by neighbourhood / month + controller
+//-> functions to filter by neighbourhood / month + controller
 //#region
 
 //-> filter by neighbourhood select
 function filterByNeighbourhood (festivalData) {
-    let neighbourhood = document.getElementById("neighbourhoodSelect").value;
+    const neighbourhood = document.getElementById("neighbourhoodSelect").value;
+    console.log(neighbourhood);
     let filteredByNeighbourhood = festivalData.filter(festival => 
         festival.bezirk === neighbourhood || neighbourhood === "all");
     displayTable(filteredByNeighbourhood);
@@ -166,71 +181,73 @@ function filterByNeighbourhood (festivalData) {
 
 //-> filter by month input
 function filterByMonth (festivalData) {
-    let pickedMonth = document.getElementById("monthInput").value;
+    const pickedMonth = document.getElementById("monthInput").value;
+    console.log(pickedMonth);
     let filteredByMonth = festivalData.filter(festival => new Date(festival.von).getMonth() === new Date(pickedMonth).getMonth() || pickedMonth === "");
     displayTable(filteredByMonth);
     return filteredByMonth;
 };
 
 //-> filter controller function 
-function filterThemAll(festivalData) {
-    const month = document.getElementById("monthInput").value;
-    const neighbourhood = document.getElementById("neighbourhoodSelect").value;
+// function filterThemAll(festivalData) {
+//     const month = document.getElementById("monthInput").value;
+//     const neighbourhood = document.getElementById("neighbourhoodSelect").value;
 
-    if (!month) {
-        filterByNeighbourhood(festivalData);
-    } else if (neighbourhood === "all") {
-        filterByMonth(festivalData);
-    } else {
-        filterByNeighbourhood(filterByMonth(festivalData))
-    };
-};
+//     if (!month) {
+//         console.log(month);
+//         filterByNeighbourhood(festivalData);
+//     } else if (neighbourhood === "all") {
+//         filterByMonth(festivalData);
+//     } else {
+//         filterByNeighbourhood(filterByMonth(festivalData))
+//     };
+// };
 
 //#endregion
-//-----> add event listeners to the filter inputs
+//-> add event listeners to the filter inputs
 //#region
 
 //-> with a main filter controller function
+// function addEventListeners (festivalData) {
+    //validating if user on the festival page
+//     if (document.getElementById("table-header") != null) {
+//         document.getElementById("neighbourhoodSelect")
+//             .addEventListener("change", filterThemAll(festivalData));
+//         document.getElementById("monthInput")
+//             .addEventListener("change", filterThemAll(festivalData));
+//     };
+// };
+
+//-> without a main filter controller function
 function addEventListeners (festivalData) {
     //validating if user on the festival page
     if (document.getElementById("table-header") != null) {
         document.getElementById("neighbourhoodSelect")
-            .addEventListener("change", filterThemAll(festivalData));
+            .addEventListener("change", function event () {
+                if (document.getElementById("monthInput").value === "") {
+                    filterByNeighbourhood(festivalData); 
+                } else {
+                    filterByNeighbourhood(filterByMonth(festivalData))
+                };
+            });
         document.getElementById("monthInput")
-            .addEventListener("change", filterThemAll(festivalData));
+            .addEventListener("change", function event () {
+                if (document.getElementById("neighbourhoodSelect").value === "all") {
+                    filterByMonth(festivalData);
+                } else {
+                    filterByMonth(filterByNeighbourhood(festivalData));
+                };
+            });
     };
 };
 
-//-> without a main filter controller function
-// function addEventListeners (festivalData) {
-//     //validating if user on the festival page
-//     if (document.getElementById("table-header") != null) {
-//         document.getElementById("neighbourhoodSelect")
-//             .addEventListener("change", function event () {
-//                 if (document.getElementById("monthInput").value === "") {
-//                     filterByNeighbourhood(festivalData); 
-//                 } else {
-//                     filterByNeighbourhood(filterByMonth(festivalData))
-//                 };
-//             });
-//         document.getElementById("monthInput")
-//             .addEventListener("change", function event () {
-//                 if (document.getElementById("neighbourhoodSelect").value === "all") {
-//                     filterByMonth(festivalData);
-//                 } else {
-//                     filterByMonth(filterByNeighbourhood(festivalData));
-//                 };
-//             });
-
 //#endregion
-//-----> display table function for the street-festivals.html page and a function for no results notification
+//-> display table function for the street-festivals.html page and a function for no results notification
 //#region
 
 function displayTable (festivalData) {
     // locating the table body
-    // let tableHeader = document.getElementById("table-header");
-    let tableBody = document.getElementById("table-body");
-    // let notification = document.getElementById("no-results-notification");
+    const tableBody = document.getElementById("table-body");
 
     //validating if user on the festival page
     if (tableBody != null) {
@@ -241,28 +258,28 @@ function displayTable (festivalData) {
         const contentToDisplay = document.getElementById("content-to-display");
         contentToDisplay.classList.remove("invisible");
         //setting the table content to empty - needed while updating filters
-        clearDOM();
+        clearDynamicSearch();
         //creating table contents from the data
         for (let n = 0; n < festivalData.length; n++) {
-            let tr = document.createElement("tr");
+            const tr = document.createElement("tr");
 
-            let td1 = document.createElement("td");
-            let eventLink = createEventLink(festivalData, n);
+            const td1 = document.createElement("td");
+            const eventLink = createEventLink(festivalData, n);
             // td1.innerHTML = festivalData[n]["bezeichnung"];
 
-            let td2 = document.createElement("td");
-            let date = new Date(festivalData[n]["von"]).toLocaleDateString("en-GB", {
+            const td2 = document.createElement("td");
+            const date = new Date(festivalData[n]["von"]).toLocaleDateString("en-GB", {
                 day: "numeric",
                 month: "long",
                 year: "numeric",
               });
             td2.innerHTML = date;
 
-            let td3 = document.createElement("td");
+            const td3 = document.createElement("td");
             td3.innerHTML = festivalData[n]["bezirk"];
 
-            let td4 = document.createElement("td");
-            let festivalDetailButton = document.createElement("button");
+            const td4 = document.createElement("td");
+            const festivalDetailButton = document.createElement("button");
             // let festivalDetailButton = createFestivalDetailButton(festivalData[n]["bezeichnung"]);
 
             tr.appendChild(td1);
@@ -273,21 +290,20 @@ function displayTable (festivalData) {
             tr.appendChild(td4);
             tableBody.appendChild(tr);
         }; 
+        let numberOfResults = tableBody.childElementCount;
+        displayNoResultsNotification(numberOfResults);
     }; 
-    let numberOfResults = tableBody.childElementCount;
-    displayNoResultsNotification(numberOfResults);
-}; 
-//-----> function for no results notification
 
+}; 
+//-> function for no results notification
 function displayNoResultsNotification (numberOfResults) {
-        let tableHeader = document.getElementById("table-header");
-        let tableBody = document.getElementById("table-body");
-        let notification = document.getElementById("no-results-notification");
+        const tableHeader = document.getElementById("table-header");
+        const tableBody = document.getElementById("table-body");
+        const notification = document.getElementById("no-results-notification");
         
         if (!numberOfResults) {
             notification.classList.remove("d-none");
             tableHeader.classList.add("d-none");
-            // console.log(tableHeader);
         } else {
             tableHeader.classList.remove("d-none");
             notification.classList.add("d-none");
@@ -295,9 +311,10 @@ function displayNoResultsNotification (numberOfResults) {
 };
 
 //#endregion
-//-----> dynamic search for a festival function (controller)
-//#region
 
+//IV DYNAMIC SEARCH
+//-> dynamic search for a festival function (controller & fetch)
+//#region
 const searchFestival = async (searchTerm) => {
     const searchUrl = url+searchTerm;
 
@@ -305,7 +322,7 @@ const searchFestival = async (searchTerm) => {
     const response = await fetch(searchUrl);
     const searchData = await response.json();
     const searchList = searchData.index;
-    clearSearchFields();
+    clearFilters();
     displayOptions(searchList);
     addEventListeners(searchList);
     displayTable(searchList);
@@ -316,7 +333,7 @@ const searchFestival = async (searchTerm) => {
 };
 
 //#endregion
-//-----> adding event listeners to the search field
+//-> adding event listeners to the search field
 //#region
 function searchByInput () {
     const searchInput = document.getElementById("search-input");
@@ -336,9 +353,8 @@ function searchByInput () {
 };
 
 //#endregion
-//-----> see all results functionality for the dynamic search (page reload)
+//-> see all results functionality for the dynamic search (page reload)
 //#region
-
 function addAllResultsButton () {
     const button = document.querySelector("#all-results-button");
 
@@ -346,16 +362,15 @@ function addAllResultsButton () {
     location.reload();
     }; 
 
-    button.addEventListener('click', refreshPage)
-    button.classList.remove("d-none")
-}
+    button.addEventListener('click', refreshPage);
+    button.classList.remove("d-none");
+};
 
 //#endregion
-//-----> DOM and filter clearing functions
+//-> search and filter clearing functions
 //#region
-
 //clear the search fields
-function clearDOM () {
+function clearDynamicSearch () {
 
     if (document.getElementById("search-input") != null) {
         document.getElementById("search-input").value = "";
@@ -365,13 +380,13 @@ function clearDOM () {
     }; 
 };
 
-//clearing the search fields
-function clearSearchFields () {
+//clearing the filter input fields and values
+function clearFilters () {
     const neighbourhoodSelect = document.getElementById("neighbourhoodSelect")
 
     if (neighbourhoodSelect != null) {
         neighbourhoodSelect.innerHTML = "";
-        let allOption = document.createElement("option");
+        const allOption = document.createElement("option");
         allOption.value = "all";
         allOption.innerText = "All";
         neighbourhoodSelect.appendChild(allOption);
