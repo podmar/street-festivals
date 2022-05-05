@@ -285,9 +285,10 @@ function displayTable (festivalData) {
             tr.appendChild(td4);
             tableBody.appendChild(tr);
         }; 
+        let numberOfResults = tableBody.childElementCount;
+        displayNoResultsNotification(numberOfResults);
     }; 
-    let numberOfResults = tableBody.childElementCount;
-    displayNoResultsNotification(numberOfResults);
+
 }; 
 //-> function for no results notification
 function displayNoResultsNotification (numberOfResults) {
