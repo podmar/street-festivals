@@ -188,7 +188,7 @@ function filterByMonth (festivalData) {
     return filteredByMonth;
 };
 
-//-> filter controller function 
+//-> filter controller function: not functional
 // function filterThemAll(festivalData) {
 //     const month = document.getElementById("monthInput").value;
 //     const neighbourhood = document.getElementById("neighbourhoodSelect").value;
@@ -207,9 +207,9 @@ function filterByMonth (festivalData) {
 //-> add event listeners to the filter inputs
 //#region
 
-//-> with a main filter controller function
+//-> with a main filter controller function: not functional
 // function addEventListeners (festivalData) {
-    //validating if user on the festival page
+//  //validating if user on the festival page
 //     if (document.getElementById("table-header") != null) {
 //         document.getElementById("neighbourhoodSelect")
 //             .addEventListener("change", filterThemAll(festivalData));
