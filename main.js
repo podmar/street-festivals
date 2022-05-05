@@ -323,7 +323,7 @@ function createFestivalDetailButton (festivalDetails) {
     return button;
 };
 
-//-> function creating a button for the expanded event view
+//-> function creating a modal for the expanded event view
 function createModal(festivalDetails) {
     const modalContainer1 = document.createElement("div");
     modalContainer1.classList.add("modal", "fade");
