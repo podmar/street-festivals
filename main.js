@@ -28,9 +28,12 @@
 let url = "https://www.berlin.de/sen/web/service/maerkte-feste/strassen-volksfeste/index.php/index/all.json?q="
 
 fetch(url)
-    .then(response => {
-        response.json()
-        // console.log(response)})
+    .then(response => response.json())
+
+    // .then(response => {
+    //     response.json();
+    //     console.log(response)})
+
     .then(data => {
         // console.log(data);
         let festivalData = data.index; 
