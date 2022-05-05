@@ -189,55 +189,57 @@ function filterByMonth (festivalData) {
 };
 
 //-> filter controller function 
-function filterThemAll(festivalData) {
-    const month = document.getElementById("monthInput").value;
-    const neighbourhood = document.getElementById("neighbourhoodSelect").value;
+// function filterThemAll(festivalData) {
+//     const month = document.getElementById("monthInput").value;
+//     const neighbourhood = document.getElementById("neighbourhoodSelect").value;
 
-    if (!month) {
-        console.log(month);
-        filterByNeighbourhood(festivalData);
-    } else if (neighbourhood === "all") {
-        filterByMonth(festivalData);
-    } else {
-        filterByNeighbourhood(filterByMonth(festivalData))
-    };
-};
+//     if (!month) {
+//         console.log(month);
+//         filterByNeighbourhood(festivalData);
+//     } else if (neighbourhood === "all") {
+//         filterByMonth(festivalData);
+//     } else {
+//         filterByNeighbourhood(filterByMonth(festivalData))
+//     };
+// };
 
 //#endregion
 //-> add event listeners to the filter inputs
 //#region
 
 //-> with a main filter controller function
+// function addEventListeners (festivalData) {
+    //validating if user on the festival page
+//     if (document.getElementById("table-header") != null) {
+//         document.getElementById("neighbourhoodSelect")
+//             .addEventListener("change", filterThemAll(festivalData));
+//         document.getElementById("monthInput")
+//             .addEventListener("change", filterThemAll(festivalData));
+//     };
+// };
+
+//-> without a main filter controller function
 function addEventListeners (festivalData) {
     //validating if user on the festival page
     if (document.getElementById("table-header") != null) {
         document.getElementById("neighbourhoodSelect")
-            .addEventListener("change", filterThemAll(festivalData));
+            .addEventListener("change", function event () {
+                if (document.getElementById("monthInput").value === "") {
+                    filterByNeighbourhood(festivalData); 
+                } else {
+                    filterByNeighbourhood(filterByMonth(festivalData))
+                };
+            });
         document.getElementById("monthInput")
-            .addEventListener("change", filterThemAll(festivalData));
+            .addEventListener("change", function event () {
+                if (document.getElementById("neighbourhoodSelect").value === "all") {
+                    filterByMonth(festivalData);
+                } else {
+                    filterByMonth(filterByNeighbourhood(festivalData));
+                };
+            });
     };
 };
-
-//-> without a main filter controller function
-// function addEventListeners (festivalData) {
-//     //validating if user on the festival page
-//     if (document.getElementById("table-header") != null) {
-//         document.getElementById("neighbourhoodSelect")
-//             .addEventListener("change", function event () {
-//                 if (document.getElementById("monthInput").value === "") {
-//                     filterByNeighbourhood(festivalData); 
-//                 } else {
-//                     filterByNeighbourhood(filterByMonth(festivalData))
-//                 };
-//             });
-//         document.getElementById("monthInput")
-//             .addEventListener("change", function event () {
-//                 if (document.getElementById("neighbourhoodSelect").value === "all") {
-//                     filterByMonth(festivalData);
-//                 } else {
-//                     filterByMonth(filterByNeighbourhood(festivalData));
-//                 };
-//             });
 
 //#endregion
 //-> display table function for the street-festivals.html page and a function for no results notification
@@ -360,8 +362,8 @@ function addAllResultsButton () {
     location.reload();
     }; 
 
-    button.addEventListener('click', refreshPage)
-    button.classList.remove("d-none")
+    button.addEventListener('click', refreshPage);
+    button.classList.remove("d-none");
 };
 
 //#endregion
