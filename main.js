@@ -279,9 +279,10 @@ function displayTable (festivalData) {
             td3.innerHTML = festivalData[n]["bezirk"];
 
             const td4 = document.createElement("td");
-            // td4.classList.add("d-flex", "align-items-center")
-            const festivalDetailButton = createFestivalDetailButton(festivalData[n]["bezeichnung"]);
+            const festivalDetailButton = createFestivalDetailButton(festivalData[n]);
+            const festivalModal = createModal(festivalData[n]);
 
+            document.body.appendChild(festivalModal);
             tr.appendChild(td1);
             td1.appendChild(eventLink);
             tr.appendChild(td2);
@@ -311,12 +312,63 @@ function displayNoResultsNotification (numberOfResults) {
 };
 
 //-> function creating a button for the expanded event view
-function createFestivalDetailButton (FestivalName) {
+function createFestivalDetailButton (festivalDetails) {
     const button = document.createElement("button");
     button.classList.add("btn", "btn-light", "btn-sm");
     button.innerText = "More";
+    button.setAttribute("type", "button"); 
+    button.setAttribute("data-toggle", "modal" ); 
+    button.setAttribute("data-target", `${festivalDetails.id}EventModal`);
+
     return button;
 };
+
+//-> function creating a button for the expanded event view
+function createModal(festivalDetails) {
+    const modalContainer1 = document.createElement("div");
+    modalContainer1.classList.add("modal", "fade");
+    modalContainer1.setAttribute("id", `${festivalDetails.id}EventModal`);
+    modalContainer1.setAttribute("tabindex", "-1");
+    modalContainer1.setAttribute("role", "dialog");
+    modalContainer1.setAttribute("aria-labelledby", `${festivalDetails.id}EventModalLabel`)
+    modalContainer1.setAttribute("aria-hidden", "true");
+
+    const modalContainer2 = document.createElement("div");
+    modalContainer2.classList.add("modal-dialog", "modal-dialog-centered");
+    modalContainer2.setAttribute("role", "document");
+
+    const modalContainer3 = document.createElement("div");
+    modalContainer3.classList.add("modal-content");
+
+    const modalContainer4 = document.createElement("div");
+    modalContainer4.classList.add("modal-header");
+
+    modalContainer3.appendChild(modalContainer4);
+    modalContainer2.appendChild(modalContainer3);
+    modalContainer1.appendChild(modalContainer2);
+
+    return modalContainer1;
+};
+
+// {/* <div class="" id="" tabindex="" role="" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+//   <div class=" modal-dialog-centered" role="document">
+//     <div class="modal-content">
+//       <div class="modal-header">
+//         <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+//         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+//           <span aria-hidden="true">&times;</span>
+//         </button>
+//       </div>
+//       <div class="modal-body">
+//         ...
+//       </div>
+//       <div class="modal-footer">
+//         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+//         <button type="button" class="btn btn-primary">Save changes</button>
+//       </div>
+//     </div>
+//   </div>
+// </div> */}
 
 //#endregion
 
