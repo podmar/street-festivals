@@ -172,6 +172,7 @@ function displayOptions (festivalData) {
 //-> filter by neighbourhood select
 function filterByNeighbourhood (festivalData) {
     const neighbourhood = document.getElementById("neighbourhoodSelect").value;
+    console.log(neighbourhood);
     let filteredByNeighbourhood = festivalData.filter(festival => 
         festival.bezirk === neighbourhood || neighbourhood === "all");
     displayTable(filteredByNeighbourhood);
@@ -181,6 +182,7 @@ function filterByNeighbourhood (festivalData) {
 //-> filter by month input
 function filterByMonth (festivalData) {
     const pickedMonth = document.getElementById("monthInput").value;
+    console.log(pickedMonth);
     let filteredByMonth = festivalData.filter(festival => new Date(festival.von).getMonth() === new Date(pickedMonth).getMonth() || pickedMonth === "");
     displayTable(filteredByMonth);
     return filteredByMonth;
@@ -192,6 +194,7 @@ function filterThemAll(festivalData) {
     const neighbourhood = document.getElementById("neighbourhoodSelect").value;
 
     if (!month) {
+        console.log(month);
         filterByNeighbourhood(festivalData);
     } else if (neighbourhood === "all") {
         filterByMonth(festivalData);
