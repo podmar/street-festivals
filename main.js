@@ -279,8 +279,8 @@ function displayTable (festivalData) {
             td3.innerHTML = festivalData[n]["bezirk"];
 
             const td4 = document.createElement("td");
-            const festivalDetailButton = document.createElement("button");
-            // let festivalDetailButton = createFestivalDetailButton(festivalData[n]["bezeichnung"]);
+            // td4.classList.add("d-flex", "align-items-center")
+            const festivalDetailButton = createFestivalDetailButton(festivalData[n]["bezeichnung"]);
 
             tr.appendChild(td1);
             td1.appendChild(eventLink);
@@ -308,6 +308,14 @@ function displayNoResultsNotification (numberOfResults) {
             tableHeader.classList.remove("d-none");
             notification.classList.add("d-none");
         };
+};
+
+//-> function creating a button for the expanded event view
+function createFestivalDetailButton (FestivalName) {
+    const button = document.createElement("button");
+    button.classList.add("btn", "btn-light", "btn-sm");
+    button.innerText = "More";
+    return button;
 };
 
 //#endregion
