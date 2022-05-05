@@ -317,8 +317,8 @@ function createFestivalDetailButton (festivalDetails) {
     button.classList.add("btn", "btn-light", "btn-sm");
     button.innerText = "More";
     button.setAttribute("type", "button"); 
-    button.setAttribute("data-toggle", "modal" ); 
-    button.setAttribute("data-target", `${festivalDetails.id}EventModal`);
+    button.setAttribute("data-bs-toggle", "modal" ); 
+    button.setAttribute("data-bs-target", `#ModalID${festivalDetails.id}`);
 
     return button;
 };
@@ -327,10 +327,10 @@ function createFestivalDetailButton (festivalDetails) {
 function createModal(festivalDetails) {
     const modalContainer1 = document.createElement("div");
     modalContainer1.classList.add("modal", "fade");
-    modalContainer1.setAttribute("id", `${festivalDetails.id}EventModal`);
+    modalContainer1.setAttribute("id", `ModalID${festivalDetails.id}`);
     modalContainer1.setAttribute("tabindex", "-1");
     modalContainer1.setAttribute("role", "dialog");
-    modalContainer1.setAttribute("aria-labelledby", `${festivalDetails.id}EventModalLabel`)
+    modalContainer1.setAttribute("aria-labelledby", `ModalID${festivalDetails.id}`)
     modalContainer1.setAttribute("aria-hidden", "true");
 
     const modalContainer2 = document.createElement("div");
@@ -342,6 +342,8 @@ function createModal(festivalDetails) {
 
     const modalContainer4 = document.createElement("div");
     modalContainer4.classList.add("modal-header");
+
+
 
     modalContainer3.appendChild(modalContainer4);
     modalContainer2.appendChild(modalContainer3);
