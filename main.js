@@ -11,7 +11,7 @@
 //-> display select options for the filters on street-festivals.html page
 //-> functions to filter by neighbourhood / month + controller
 //-> add event listeners to the filter inputs
-//-> display table function for the street-festivals.html page and a function for no results notification
+//-> display table function, functions for no results notification, creating buttons and modals
 
 //IV DYNAMIC SEARCH
 //-> dynamic search for a festival function (controller & fetch)
@@ -242,7 +242,7 @@ function addEventListeners (festivalData) {
 };
 
 //#endregion
-//-> display table function for the street-festivals.html page and a function for no results notification
+//-> display table function, functions for no results notification, creating buttons and modals
 //#region
 
 function displayTable (festivalData) {
@@ -349,26 +349,6 @@ function createModal(festivalDetails) {
 
     return modalContainer1;
 };
-
-// {/* <div class="" id="" tabindex="" role="" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-//   <div class=" modal-dialog-centered" role="document">
-//     <div class="modal-content">
-//       <div class="modal-header">
-//         <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-//         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-//           <span aria-hidden="true">&times;</span>
-//         </button>
-//       </div>
-//       <div class="modal-body">
-//         ...
-//       </div>
-//       <div class="modal-footer">
-//         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-//         <button type="button" class="btn btn-primary">Save changes</button>
-//       </div>
-//     </div>
-//   </div>
-// </div> */}
 
 //#endregion
 
