@@ -318,7 +318,7 @@ function createFestivalDetailButton (festivalDetails) {
     button.innerText = "More";
     button.setAttribute("type", "button"); 
     button.setAttribute("data-bs-toggle", "modal" ); 
-    button.setAttribute("data-bs-target", `#ModalID${festivalDetails.id}`);
+    button.setAttribute("data-bs-target", `#modalID${festivalDetails.id}`);
 
     return button;
 };
@@ -327,10 +327,10 @@ function createFestivalDetailButton (festivalDetails) {
 function createModal(festivalDetails) {
     const modalContainer1 = document.createElement("div");
     modalContainer1.classList.add("modal", "fade");
-    modalContainer1.setAttribute("id", `ModalID${festivalDetails.id}`);
+    modalContainer1.setAttribute("id", `modalID${festivalDetails.id}`);
     modalContainer1.setAttribute("tabindex", "-1");
     modalContainer1.setAttribute("role", "dialog");
-    modalContainer1.setAttribute("aria-labelledby", `ModalID${festivalDetails.id}`)
+    modalContainer1.setAttribute("aria-labelledby", `modalID${festivalDetails.id}`)
     modalContainer1.setAttribute("aria-hidden", "true");
 
     const modalContainer2 = document.createElement("div");
@@ -343,8 +343,24 @@ function createModal(festivalDetails) {
     const modalContainer4 = document.createElement("div");
     modalContainer4.classList.add("modal-header");
 
+    const modalTitle = document.createElement("h5");
+    modalTitle.classList.add("modal-title");
+    modalTitle.setAttribute("id", `modalTitleID${festivalDetails.id}`);
+    modalTitle.innerText = festivalDetails.bezeichnung;
 
+    const closeButton = document.createElement("button");
+    closeButton.classList.add("close");
+    closeButton.setAttribute("type", "button"); 
+    closeButton.setAttribute("data-bs-dismiss", "modal" ); 
+    closeButton.setAttribute("aria-label", "Close");
 
+    const closeSpan = document.createElement("button");
+    closeSpan.setAttribute("aria-hidden", "true");
+    closeSpan.innerHTML = "&times;"
+
+    closeButton.appendChild(closeSpan);
+    modalContainer4.appendChild(closeButton);
+    modalContainer4.appendChild(modalTitle);
     modalContainer3.appendChild(modalContainer4);
     modalContainer2.appendChild(modalContainer3);
     modalContainer1.appendChild(modalContainer2);
