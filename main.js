@@ -57,7 +57,7 @@ fetch(url)
 //function to expand the text on the main page
 function expandTextAndPic () {
     const paragraph = document.getElementById("index-description");
-    paragraph.removeAttribute("class");
+    paragraph.classList.toggle("d-none");
 
     const coverPic = document.getElementById("cover-pic");
     coverPic.setAttribute("style", "height: 22em; width: 55em; object-fit: cover");
@@ -66,7 +66,7 @@ function expandTextAndPic () {
 //function to hide the text on the main page
 function collapseTextAndPic () {    
     const paragraph = document.getElementById("index-description");
-    paragraph.setAttribute("class", "d-none");
+    paragraph.classList.toggle("d-none");
 
     const coverPic = document.getElementById("cover-pic");
     coverPic.setAttribute("style", "height: 16em; width: 55em; object-fit: cover");
