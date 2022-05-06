@@ -450,13 +450,11 @@ function clearDynamicSearch () {
 function clearFilters () {
     const neighbourhoodSelect = document.getElementById("neighbourhoodSelect")
 
-    if (neighbourhoodSelect != null) {
-        while (neighbourhoodSelect.lastChild.id != "all-option") {
-            neighbourhoodSelect.removeChild(neighbourhoodSelect.lastChild);
-        };
+    while (neighbourhoodSelect.lastChild.id != "all-option") {
+        neighbourhoodSelect.removeChild(neighbourhoodSelect.lastChild);
+    };
 
-        document.getElementById("monthInput").value = "";
-    }; 
+    document.getElementById("monthInput").value = "";
 };
 
 //#endregion
