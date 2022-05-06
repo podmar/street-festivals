@@ -90,8 +90,8 @@ function buttonClickAction () {
 function createEventLink (festivalData, i) {
     const eventLink = document.createElement("a");
     const linkLocation = festivalData[i]["www"];
-    // console.log(linkLocation);
     eventLink.setAttribute("href", linkLocation);
+    eventLink.setAttribute("target", "_blank");
     eventLink.classList.add("text-decoration-none", "text-reset");
     eventLink.innerHTML = festivalData[i]["bezeichnung"];
     return eventLink;
