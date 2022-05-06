@@ -300,7 +300,7 @@ function displayTable (festivalData) {
         tableBody.appendChild(tr);
     }; 
 
-    let numberOfResults = tableBody.childElementCount;
+    let numberOfResults = festivalData.length;
     displayNoResultsNotification(numberOfResults);
 }; 
 
