@@ -37,7 +37,7 @@ fetch(url)
     .then(data => {
         // console.log(data);
         let festivalData = data.index; 
-        displayCards(festivalData);
+        displayCards(filterFestivalsWithPhotos(festivalData));
         displayTable(festivalData);
         displayOptions(festivalData);
         addEventListeners(festivalData);
@@ -105,6 +105,7 @@ function displayCards (festivalData) {
         //hide the spinner with d-none, as I want the content to be displayed at the top of the page.
         const spinner = document.getElementById("spinner");
         spinner.classList.add("d-none");
+        
         //generating cards
         for (let i = 0; i < 6; i++) {
 
@@ -114,6 +115,11 @@ function displayCards (festivalData) {
         const card = document.createElement("div");
         card.classList.add("card");
         card.setAttribute("style", "height: 10rem");
+        
+        const photo = document.createElement("img");
+        photo.classList.add("card-img-top");
+        photo.setAttribute("src", `www.berlin.de${festivalData[i]["bild"]}`);
+        photo.setAttribute("alt", `photo of ${festivalData[i]["bezeichnung"]}`);
 
         const cardBody = document.createElement("div");
         cardBody.setAttribute("class", "card-body");
@@ -130,12 +136,21 @@ function displayCards (festivalData) {
         cardTitle.appendChild(eventLink);
         cardBody.appendChild(cardTitle);
         cardBody.appendChild(cardText);
+        card.appendChild(photo);
         card.appendChild(cardBody);
         cardBox.appendChild(card);
         cardContainer.appendChild(cardBox);
         };
     };
 };
+
+//-> function to filter events that have photos
+function filterFestivalsWithPhotos (festivalData) {
+    const festivalsWithPhotos = festivalData.filter(festival => festival.bild != "");
+    return festivalsWithPhotos; 
+};
+
+//-> 
 
 //#endregion
 
