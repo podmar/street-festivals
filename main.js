@@ -451,11 +451,9 @@ function clearFilters () {
     const neighbourhoodSelect = document.getElementById("neighbourhoodSelect")
 
     if (neighbourhoodSelect != null) {
-        neighbourhoodSelect.innerHTML = "";
-        const allOption = document.createElement("option");
-        allOption.value = "all";
-        allOption.innerText = "All";
-        neighbourhoodSelect.appendChild(allOption);
+        while (neighbourhoodSelect.lastChild.id != "all-option") {
+            neighbourhoodSelect.removeChild(neighbourhoodSelect.lastChild);
+        };
 
         document.getElementById("monthInput").value = "";
     }; 
