@@ -90,7 +90,7 @@ function buttonClickAction () {
 function createEventLink (festivalData, i) {
     const eventLink = document.createElement("a");
     const linkLocation = festivalData[i]["www"];
-    eventLink.setAttribute("href", linkLocation);
+    eventLink.setAttribute("href", `http://${linkLocation}`);
     eventLink.setAttribute("target", "_blank");
     eventLink.classList.add("text-decoration-none", "text-reset");
     eventLink.innerHTML = festivalData[i]["bezeichnung"];
@@ -119,8 +119,9 @@ function displayCards (festivalData) {
     
     const photo = document.createElement("img");
     photo.classList.add("card-img-top");
-    photo.setAttribute("src", `www.berlin.de${festivalData[i]["bild"]}`);
+    photo.setAttribute("src", `http://www.berlin.de${festivalData[i]["bild"]}`);
     photo.setAttribute("alt", `photo of ${festivalData[i]["bezeichnung"]}`);
+    console.log(photo);
 
     const cardBody = document.createElement("div");
     cardBody.setAttribute("class", "card-body");
