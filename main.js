@@ -38,7 +38,7 @@ fetch(url)
         // console.log(data);
         let festivalData = data.index; 
             if (document.title.includes("Main")) {
-                displayCards(filterFestivalsWithPhotos(festivalData));
+                displayCards(filterFutureFestivals(filterFestivalsWithPhotos(festivalData)));
             } else {
                 displayTable(festivalData);
                 displayOptions(festivalData);
@@ -152,7 +152,12 @@ function filterFestivalsWithPhotos (festivalData) {
     return festivalsWithPhotos; 
 };
 
-//-> 
+//-> function for filtering event this and future months
+function filterFutureFestivals (someFestivalData) {
+    const futureFestivals = someFestivalData.filter(festival => new Date(festival.von).getMonth() >= new Date.now.getMonth());
+    return futureFestivals; 
+};
+
 
 //#endregion
 
@@ -195,11 +200,17 @@ function filterByNeighbourhood (festivalData) {
 //-> filter by month input
 function filterByMonth (festivalData) {
     const pickedMonth = document.getElementById("monthInput").value;
-    console.log(pickedMonth);
     let filteredByMonth = festivalData.filter(festival => new Date(festival.von).getMonth() === new Date(pickedMonth).getMonth() || pickedMonth === "");
     displayTable(filteredByMonth);
     return filteredByMonth;
 };
+
+//-> version that could potentially be used on the main page (currently not in use)
+// function filterByMonth (festivalData, pickedMonth) {
+//     let filteredByMonth = festivalData.filter(festival => new Date(festival.von).getMonth() === new Date(pickedMonth).getMonth() || pickedMonth === "");
+//     displayTable(filteredByMonth);
+//     return filteredByMonth;
+// };
 
 //-> filter controller function: not functional
 // function filterThemAll(festivalData) {
@@ -359,7 +370,7 @@ function createModal(festivalDetails) {
     modalTitle.innerText = festivalDetails.bezeichnung;
 
     const closeButton = document.createElement("button");
-    closeButton.classList.add("close");
+    closeButton.classList.add("btn-close");
     closeButton.setAttribute("type", "button"); 
     closeButton.setAttribute("data-bs-dismiss", "modal" ); 
     closeButton.setAttribute("aria-label", "Close");
@@ -368,9 +379,9 @@ function createModal(festivalDetails) {
     closeSpan.setAttribute("aria-hidden", "true");
     closeSpan.innerHTML = "&times;"
 
+    modalContainer4.appendChild(modalTitle);
     closeButton.appendChild(closeSpan);
     modalContainer4.appendChild(closeButton);
-    modalContainer4.appendChild(modalTitle);
     modalContainer3.appendChild(modalContainer4);
     modalContainer2.appendChild(modalContainer3);
     modalContainer1.appendChild(modalContainer2);
