@@ -154,7 +154,7 @@ function filterFestivalsWithPhotos (festivalData) {
 
 //-> function for filtering event this and future months
 function filterFutureFestivals (someFestivalData) {
-    const futureFestivals = someFestivalData.filter(festival => new Date(festival.von).getMonth() >= new Date.now.getMonth());
+    const futureFestivals = someFestivalData.filter(festival => new Date(festival.von).getMonth() >= new Date().getMonth());
     return futureFestivals; 
 };
 
