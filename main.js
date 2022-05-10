@@ -111,18 +111,17 @@ function displayCards (festivalData) {
     for (let i = 0; i < 6; i++) {
 
     const cardBox = document.createElement("div");
-    cardBox.classList.add("col-lg-4", "col-md-6", "p-2", "container");
+    cardBox.classList.add("col-lg-4", "col-md-6", "p-5", "container");
     
     const card = document.createElement("div");
     card.classList.add("card");
     card.setAttribute("style", "box-shadow: 0px 5px 15px grey");
-
     
     const photo = document.createElement("img");
     photo.classList.add("card-img-top");
     photo.setAttribute("src", `http://www.berlin.de${festivalData[i]["bild"]}`);
     photo.setAttribute("alt", `photo of ${festivalData[i]["bezeichnung"]}`);
-    // photo.setAttribute("style", "with: 3em");
+    photo.setAttribute("style", "max-width:50%");
     photo.setAttribute("style", "object-fit: cover");
 
     const cardBody = document.createElement("div");
